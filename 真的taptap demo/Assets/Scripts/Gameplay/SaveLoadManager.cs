@@ -1,24 +1,24 @@
 // SaveLoadManager.cs
 using UnityEngine;
-using System.IO; // ÓÃÓÚÎÄ¼ş²Ù×÷
+using System.IO; // ç”¨äºæ–‡ä»¶æ“ä½œ
 
-[System.Serializable] // Õâ¸ö±êÇ©ÈÃÕâ¸öÀà¿ÉÒÔ±»ĞòÁĞ»¯£¨×ª»»³ÉJSON£©
+[System.Serializable] // è¿™ä¸ªæ ‡ç­¾è®©è¿™ä¸ªç±»å¯ä»¥è¢«åºåˆ—åŒ–ï¼ˆè½¬æ¢æˆJSONï¼‰
 public class GameData
 {
-    // ÕâÀïÃæµÄ±äÁ¿ÒªºÍGameManagerÀïĞèÒª±£´æµÄÒ»Ò»¶ÔÓ¦
+    // è¿™é‡Œé¢çš„å˜é‡è¦å’ŒGameManageré‡Œéœ€è¦ä¿å­˜çš„ä¸€ä¸€å¯¹åº”
     public int savedDay;
     public int savedStamina;
     public int savedSanity;
     public int savedMoney;
     public string savedSceneName;
-    // »¹¿ÉÒÔ´æ±³°üÊı¾İµÈµÈ...
+    // è¿˜å¯ä»¥å­˜èƒŒåŒ…æ•°æ®ç­‰ç­‰...
 }
 
 public class SaveLoadManager : MonoBehaviour
 {
     public static SaveLoadManager Instance;
 
-    private string saveFilePath; // ´æµµÎÄ¼şÂ·¾¶
+    private string saveFilePath; // å­˜æ¡£æ–‡ä»¶è·¯å¾„
 
     void Awake()
     {
@@ -36,46 +36,46 @@ public class SaveLoadManager : MonoBehaviour
 
     public void SaveGame()
     {
-        // 1. ´´½¨Ò»¸ö´æµµÊı¾İ¶ÔÏó£¬²¢´ÓGameManagerÖĞ»ñÈ¡µ±Ç°Êı¾İ
+        // 1. åˆ›å»ºä¸€ä¸ªå­˜æ¡£æ•°æ®å¯¹è±¡ï¼Œå¹¶ä»GameManagerä¸­è·å–å½“å‰æ•°æ®
         GameData data = new GameData();
         data.savedDay = GameManager.Instance.currentDay;
         data.savedStamina = GameManager.Instance.playerStamina;
-        // ... Ìî³äÆäËûÊı¾İ
+        // ... å¡«å……å…¶ä»–æ•°æ®
 
-        // 2. ½«Êı¾İ¶ÔÏó×ª»»ÎªJSON×Ö·û´®
+        // 2. å°†æ•°æ®å¯¹è±¡è½¬æ¢ä¸ºJSONå­—ç¬¦ä¸²
         string jsonData = JsonUtility.ToJson(data);
 
-        // 3. ½«JSON×Ö·û´®Ğ´ÈëÎÄ¼ş
+        // 3. å°†JSONå­—ç¬¦ä¸²å†™å…¥æ–‡ä»¶
         File.WriteAllText(saveFilePath, jsonData);
 
-        Debug.Log("ÓÎÏ·ÒÑ±£´æ£¡");
+        Debug.Log("æ¸¸æˆå·²ä¿å­˜ï¼");
     }
 
     public void LoadGame()
     {
-        // 1. ¼ì²é´æµµÎÄ¼şÊÇ·ñ´æÔÚ
+        // 1. æ£€æŸ¥å­˜æ¡£æ–‡ä»¶æ˜¯å¦å­˜åœ¨
         if (File.Exists(saveFilePath))
         {
-            // 2. ´ÓÎÄ¼ş¶ÁÈ¡JSON×Ö·û´®
+            // 2. ä»æ–‡ä»¶è¯»å–JSONå­—ç¬¦ä¸²
             string jsonData = File.ReadAllText(saveFilePath);
 
-            // 3. ½«JSON×Ö·û´®×ª»»»ØÊı¾İ¶ÔÏó
+            // 3. å°†JSONå­—ç¬¦ä¸²è½¬æ¢å›æ•°æ®å¯¹è±¡
             GameData data = JsonUtility.FromJson<GameData>(jsonData);
 
-            // 4. ½«Êı¾İĞ´»ØGameManager
+            // 4. å°†æ•°æ®å†™å›GameManager
             GameManager.Instance.currentDay = data.savedDay;
             GameManager.Instance.playerStamina = data.savedStamina;
-            // ... ¼ÓÔØÆäËûÊı¾İ
+            // ... åŠ è½½å…¶ä»–æ•°æ®
 
-            Debug.Log("ÓÎÏ·ÒÑ¼ÓÔØ£¡");
+            Debug.Log("æ¸¸æˆå·²åŠ è½½ï¼");
         }
         else
         {
-            Debug.LogWarning("Ã»ÓĞÕÒµ½´æµµÎÄ¼ş¡£");
+            Debug.LogWarning("æ²¡æœ‰æ‰¾åˆ°å­˜æ¡£æ–‡ä»¶ã€‚");
         }
     }
 
-    // ¿ÉÒÔÔÚÓÎÏ·ÍË³öÊ±×Ô¶¯µ÷ÓÃ±£´æ£¨ÊµÏÖ×Ô¶¯´æµµ£©
+    // å¯ä»¥åœ¨æ¸¸æˆé€€å‡ºæ—¶è‡ªåŠ¨è°ƒç”¨ä¿å­˜ï¼ˆå®ç°è‡ªåŠ¨å­˜æ¡£ï¼‰
     void OnApplicationQuit()
     {
         SaveGame();

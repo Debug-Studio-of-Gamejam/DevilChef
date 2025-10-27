@@ -5,19 +5,19 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    // ÔÚUnity±à¼­Æ÷Àï°ÑÕâĞ©UIÃæ°åÍÏ×§¸³Öµ£¡
+    // åœ¨Unityç¼–è¾‘å™¨é‡ŒæŠŠè¿™äº›UIé¢æ¿æ‹–æ‹½èµ‹å€¼ï¼
     public GameObject startMenuPanel;
     public GameObject settingPanel;
-    public GameObject inventoryPanel; // ±³°üÃæ°å
-    // ... ÆäËûÈ«¾ÖUIÃæ°å
+    public GameObject inventoryPanel; // èƒŒåŒ…é¢æ¿
+    // ... å…¶ä»–å…¨å±€UIé¢æ¿
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            // UIManagerÍ¨³£Ò²ÔÚ¿ªÊ¼³¡¾°´´½¨£¬µ«¿ÉÒÔ¸ù¾İĞèÒª¾ö¶¨ÊÇ·ñDontDestroyOnLoad
-            // Èç¹ûÃ¿¸ö³¡¾°µÄUI¶¼²»Í¬£¬ÄÇ¾Í²»ĞèÒªDontDestroyOnLoad£¬¶øÊÇÔÚÃ¿¸ö³¡¾°ÖØÖÃÒıÓÃ¡£
+            // UIManageré€šå¸¸ä¹Ÿåœ¨å¼€å§‹åœºæ™¯åˆ›å»ºï¼Œä½†å¯ä»¥æ ¹æ®éœ€è¦å†³å®šæ˜¯å¦DontDestroyOnLoad
+            // å¦‚æœæ¯ä¸ªåœºæ™¯çš„UIéƒ½ä¸åŒï¼Œé‚£å°±ä¸éœ€è¦DontDestroyOnLoadï¼Œè€Œæ˜¯åœ¨æ¯ä¸ªåœºæ™¯é‡ç½®å¼•ç”¨ã€‚
         }
         else
         {
@@ -25,24 +25,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // ÏÔÊ¾/Òş²Ø¿ªÊ¼²Ëµ¥
+    // æ˜¾ç¤º/éšè—å¼€å§‹èœå•
     public void ToggleStartMenu(bool show)
     {
         startMenuPanel.SetActive(show);
     }
 
-    // ÏÔÊ¾/Òş²ØÉèÖÃÃæ°å
+    // æ˜¾ç¤º/éšè—è®¾ç½®é¢æ¿
     public void ToggleSettingPanel(bool show)
     {
         settingPanel.SetActive(show);
     }
 
-    // ÏÔÊ¾/Òş²Ø±³°ü
+    // æ˜¾ç¤º/éšè—èƒŒåŒ…
     public void ToggleInventory(bool show)
     {
         inventoryPanel.SetActive(show);
-        // µ±±³°ü´ò¿ªÊ±£¬¿ÉÒÔÔİÍ£ÓÎÏ·
+        // å½“èƒŒåŒ…æ‰“å¼€æ—¶ï¼Œå¯ä»¥æš‚åœæ¸¸æˆ
         GameManager.Instance.isPaused = show;
-        Time.timeScale = show ? 0 : 1; // 0´ú±íÔİÍ££¬1´ú±íÕı³£ËÙ¶È
+        Time.timeScale = show ? 0 : 1; // 0ä»£è¡¨æš‚åœï¼Œ1ä»£è¡¨æ­£å¸¸é€Ÿåº¦
     }
 }

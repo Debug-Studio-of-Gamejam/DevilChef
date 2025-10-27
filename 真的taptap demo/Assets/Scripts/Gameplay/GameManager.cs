@@ -3,9 +3,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
 
     [Header("玩家数据")]
     public int currentDay = 1;
@@ -19,23 +18,6 @@ public class GameManager : MonoBehaviour
     public bool isInDialogue = false;
 
     public List<Quest> quests = new List<Quest>();
-    
-    void Awake()
-    {
-        Debug.Log("GameManager Awake 开始，场景: " + SceneManager.GetActiveScene().name);
-
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("GameManager 单例已创建，设置不销毁");
-        }
-        else
-        {
-            Debug.Log("发现重复GameManager，销毁: " + gameObject.name);
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {

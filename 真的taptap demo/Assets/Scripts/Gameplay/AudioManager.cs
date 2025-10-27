@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip buttonClickSFX;
     public AudioClip mainMenuMusic;
 
-    // ÒôÁ¿ÉèÖÃ
+    // éŸ³é‡è®¾ç½®
     private float _masterVolume = 1f;
     private float _musicVolume = 1f;
     private float _sfxVolume = 1f;
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         LoadAudioSettings();
     }
 
-    // ÒôÁ¿¿ØÖÆ·½·¨
+    // éŸ³é‡æ§åˆ¶æ–¹æ³•
     public void SetMasterVolume(float volume)
     {
         _masterVolume = Mathf.Clamp01(volume);
@@ -94,7 +94,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // ÏÖÓĞµÄÒôÆµ²¥·Å·½·¨
+    // ç°æœ‰çš„éŸ³é¢‘æ’­æ”¾æ–¹æ³•
     public void PlayButtonClick()
     {
         if (sfxSource != null && buttonClickSFX != null)
