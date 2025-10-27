@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool isInDialogue = false;
 
+    public List<Quest> quests = new List<Quest>();
+    
     void Awake()
     {
         Debug.Log("GameManager Awake 开始，场景: " + SceneManager.GetActiveScene().name);

@@ -8,24 +8,15 @@ using UnityEngine.UIElements;
 public class TransitionManager : Singleton<TransitionManager>
 {
     public CanvasGroup canvasGroup;
-    public GameObject backButton;
     public float fadeDuration;
     bool isFading = false;
-    [SceneName] public string mapSceneName;
-    string currentSceneName;
+    
+    public string CurrentSceneName { get; private set; }
     
     public void Transition(string fromSceneName, string toSceneName)
     {
         if (!isFading)
             StartCoroutine(TransitionToScene(fromSceneName, toSceneName));
-    }
-
-    public void BackToMap()
-    {
-        if (currentSceneName != mapSceneName)
-        {
-            Transition(currentSceneName, mapSceneName);
-        }
     }
 
     private IEnumerator TransitionToScene(string fromSceneName, string toSceneName)
@@ -36,11 +27,9 @@ public class TransitionManager : Singleton<TransitionManager>
         yield return SceneManager.UnloadSceneAsync(fromSceneName);
         yield return SceneManager.LoadSceneAsync(toSceneName, LoadSceneMode.Additive);
 
-        currentSceneName = toSceneName;
+        CurrentSceneName = toSceneName;
         Scene newScene = SceneManager.GetSceneByName(toSceneName);
         SceneManager.SetActiveScene(newScene);
-        //TODO: 整理一下Map相关的逻辑
-        backButton.SetActive(currentSceneName != mapSceneName);
         
         EventHandler.CallAfterSceneLoadEvent();
         yield return Fade(0);

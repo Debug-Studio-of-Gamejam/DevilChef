@@ -23,4 +23,11 @@ public class EventHandler
     {
         AfterSceneLoadEvent?.Invoke();
     }
+    
+    public static event Action<ItemDetails,bool> ItemSelectedEvent;
+
+    public static void CallItemSelectedEvent(ItemDetails details, bool selected)
+    {
+        ItemSelectedEvent.Invoke(details, selected);
+    }
 }
