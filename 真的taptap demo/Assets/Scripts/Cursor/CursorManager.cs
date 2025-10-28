@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CursorManager : MonoBehaviour
+public class CursorManager : Singleton<CursorManager>
 {
     public Image cursor;
     ItemDetails currentItem;

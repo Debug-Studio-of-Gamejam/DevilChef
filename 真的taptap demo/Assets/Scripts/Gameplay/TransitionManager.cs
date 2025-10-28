@@ -7,12 +7,18 @@ using UnityEngine.UIElements;
 
 public class TransitionManager : Singleton<TransitionManager>
 {
+    [SceneName] public string StartSceneName;
     public CanvasGroup canvasGroup;
     public float fadeDuration;
     bool isFading = false;
     
     public string CurrentSceneName { get; private set; }
-    
+
+    private void Start()
+    {
+        Transition(string.Empty, StartSceneName);
+    }
+
     public void Transition(string fromSceneName, string toSceneName)
     {
         if (!isFading)
@@ -22,9 +28,12 @@ public class TransitionManager : Singleton<TransitionManager>
     private IEnumerator TransitionToScene(string fromSceneName, string toSceneName)
     {
         yield return Fade(1);
-        EventHandler.CallBeforeSceneUnloadEvent();
+        if (fromSceneName != string.Empty)
+        {
+            EventHandler.CallBeforeSceneUnloadEvent(); 
+            yield return SceneManager.UnloadSceneAsync(fromSceneName);
+        }
         
-        yield return SceneManager.UnloadSceneAsync(fromSceneName);
         yield return SceneManager.LoadSceneAsync(toSceneName, LoadSceneMode.Additive);
 
         CurrentSceneName = toSceneName;

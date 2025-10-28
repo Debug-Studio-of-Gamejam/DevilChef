@@ -25,6 +25,7 @@ public class DataLoader: Singleton<DataLoader>
         {
             Debug.Log($"表格数量 : {package.Workbook.Worksheets.Count}");
             ReadDialogue(package.Workbook.Worksheets[1]);
+            ReadOptions(package.Workbook.Worksheets[2]);
             // 示例
             // int.TryParse(eventsheet.Cells[i, 3].Value?.ToString() ?? "0", out newEvent.humidity);
             // float.TryParse(eventsheet.Cells[i, 8].Value.ToString(), out newEvent.duration);

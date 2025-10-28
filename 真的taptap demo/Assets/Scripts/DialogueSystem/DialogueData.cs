@@ -1,17 +1,18 @@
 
 using OfficeOpenXml.Table.PivotTable;
 
+[System.Serializable]
 public class Dialogue
 {
     public int dialogueId;
     public string dialogueText;
-    public string Description;
+    public string description;
 }
-
+[System.Serializable]
 public class Option
 {
-    public int OptionsId;
-    public string OptionText;
+    public int optionsId;
+    public string optionText;
     public int nextDialogueId;
 }
 
