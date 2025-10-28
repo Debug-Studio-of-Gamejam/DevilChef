@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: StartScene
-  sceneTo: MapScene
+  sceneTo: OpeningScene
 --- !u!1 &543033343
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
+  playerName: 0
   playerStamina: 100
   playerSanity: 100
   playerMoney: 50
