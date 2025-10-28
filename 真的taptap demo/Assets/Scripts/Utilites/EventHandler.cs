@@ -31,6 +31,13 @@ public class EventHandler
         ItemSelectedEvent?.Invoke(details, selected);
     }
     
+    public static event Action UpdateIngredients;
+
+    public static void CallUpdateIngredients()
+    {
+        UpdateIngredients?.Invoke();
+    }
+    
     public static event Action<int> DialogueFinishedEvent;
 
     public static void CallIDialogueFinishedEvent(int dialogueID)

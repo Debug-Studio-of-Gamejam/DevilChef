@@ -2,6 +2,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -11,9 +12,55 @@ public class UIManager : Singleton<UIManager>
     // ... 其他全局UI面板
     public GameObject fadePanel;
     
+    [Header("全局UI按钮")]
+    public Button globalBackpackButton; // 全局背包按钮（在所有场景中都显示）
+    
     private void Start()
     {
         fadePanel.SetActive(true);
+        
+        // 初始化全局背包按钮
+        InitializeGlobalBackpackButton();
+    }
+    
+    /// <summary>
+    /// 初始化全局背包按钮
+    /// </summary>
+    private void InitializeGlobalBackpackButton()
+    {
+        if (globalBackpackButton != null)
+        {
+            globalBackpackButton.onClick.AddListener(ToggleBackpack);
+            Debug.Log("全局背包按钮初始化成功");
+        }
+        else
+        {
+            Debug.LogWarning("全局背包按钮未找到，请检查UI设置");
+        }
+    }
+    
+    /// <summary>
+    /// 切换背包显示/隐藏（供全局按钮调用）
+    /// </summary>
+    public void ToggleBackpack()
+    {
+        if (inventoryPanel != null)
+        {
+            bool show = !inventoryPanel.activeSelf;
+            ToggleInventory(show);
+            
+            // 通知背包面板状态变化
+            var inventoryScript = inventoryPanel.GetComponent<InventoryPanel>();
+            if (inventoryScript != null)
+            {
+                if (show)
+                    inventoryScript.OnInventoryOpened();
+                else
+                    inventoryScript.OnInventoryClosed();
+            }
+            
+            Debug.Log($"背包{(show ? "打开" : "关闭")}");
+        }
     }
 
     // 显示/隐藏设置面板

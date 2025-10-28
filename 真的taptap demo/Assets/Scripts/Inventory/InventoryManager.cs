@@ -35,4 +35,26 @@ public class InventoryManager : Singleton<InventoryManager>
         else
             ingredients[i] = new IngredientEntry { name = name, amount = ingredients[i].amount + amount };
     }
+    
+    /// <summary>
+    /// 移除食材
+    /// </summary>
+    public void RemoveIngredient(IngredientName name, int amount = 1)
+    {
+        var i = ingredients.FindIndex(e => e.name == name);
+        if (i != -1)
+        {
+            int newAmount = ingredients[i].amount - amount;
+            if (newAmount <= 0)
+            {
+                // 如果数量为0或负数，移除该食材
+                ingredients.RemoveAt(i);
+            }
+            else
+            {
+                // 更新数量
+                ingredients[i] = new IngredientEntry { name = name, amount = newAmount };
+            }
+        }
+    }
 }

@@ -5,6 +5,7 @@ public enum ItemName
 
 public enum IngredientName
 {
-    None, 香槟酒,
+    None, 香槟酒, 苹果, 香蕉, 胡萝卜, 番茄, 土豆
+    //是测试用例！
 }
  
