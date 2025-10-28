@@ -88,6 +88,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
             }
             else
             {
+                Debug.Log($"停止协程并直接显示完整文字 {currentDialogueId}  一共 {textList.Count} 句，现在是 {index}");
                 // 停止协程并直接显示完整文字
                 StopCoroutine(typingCoroutine);
                 targetTextLable.text = textList[index].text;
@@ -168,6 +169,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowDialogueLine()
     {
         var line = textList[index];
+        Debug.Log($"显示第 {index} 句");
         switch (line.type)
         {
             case DialogueType.Normal:
@@ -175,7 +177,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 HideAvatars();
                 if (line.speakerName.StartsWith("主角"))
                 {
-                    characterName.text = GameManager.Instance.playerName;
+                    characterName.text = "主角";//GameManager.Instance.playerName;
                     string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
                     if (int.TryParse(numberPart, out int index))
                     {
@@ -266,6 +268,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowOptions(List<Option> options)
     {
         HideOptions();
+        isTalking = false;
         for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
             var optionObj = optionGroup[i];
