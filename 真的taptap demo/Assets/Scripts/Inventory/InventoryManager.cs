@@ -34,8 +34,5 @@ public class InventoryManager : Singleton<InventoryManager>
             ingredients.Add(new IngredientEntry { name = name, amount = amount });
         else
             ingredients[i] = new IngredientEntry { name = name, amount = ingredients[i].amount + amount };
-        
-        // 触发食材更新事件
-        EventHandler.CallUpdateIngredients();
     }
 }

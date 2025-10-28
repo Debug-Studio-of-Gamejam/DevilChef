@@ -12,13 +12,6 @@ public class EventHandler
         UpdateItemDetails?.Invoke(details);
     }
     
-    public static event Action UpdateIngredients;
-
-    public static void CallUpdateIngredients()
-    {
-        UpdateIngredients?.Invoke();
-    }
-    
     public static event Action<string> BeforeSceneUnloadEvent;
     public static void CallBeforeSceneUnloadEvent(string oldScene)
     {

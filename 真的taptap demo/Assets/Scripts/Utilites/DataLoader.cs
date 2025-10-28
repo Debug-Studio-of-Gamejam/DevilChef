@@ -11,7 +11,7 @@ public class DataLoader: Singleton<DataLoader>
     public List<Dialogue> dialogues = new List<Dialogue>();
     public List<Option> options = new List<Option>();
     
-    protected override void Awake()
+    void Awake()
     {
         Read();
     }
