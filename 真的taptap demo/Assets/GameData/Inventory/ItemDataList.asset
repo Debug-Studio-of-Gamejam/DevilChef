@@ -14,5 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDetailsList:
   - name: 1
-    icon: {fileID: 21300000, guid: 36f4130fe34d44a23a092a823b4e53dd, type: 3}
-    description: "\u8FD9\u662F\u5730\u57DF\u5F2F\u5200"
+    icon: {fileID: 21300000, guid: be4f2599212854faabedbe3951019de2, type: 3}
+    description: "\u539F\u91CE\u770B\u5B88\u4E09\u53F6\u866B\u7684\u6B66\u5668\uFF0C\u4F20\u8BF4\u53EF\u4EE5\u780D\u4E0B\u4E16\u754C\u4E0A\u6240\u6709\u751F\u7269\u7684\u8116\u9888\u3002"
+  - name: 2
+    icon: {fileID: 21300000, guid: bec3a20b183f64cb1850eeb6ccfc53d3, type: 3}
+    description: "\u963F\u5580\u7409\u65AF\u66FE\u7ECF\u7528\u5B83\u559D\u8FC7\u4EA1\u7075\u7684\u6CC9\u6C34\u3002\u800C\u5982\u4ECA\uFF0C\u5B83\u53EA\u662F\u5E73\u9759\u5730\u8EBA\u5728\u5580\u620E\u6CB3\u7554\u3002"
+  - name: 3
+    icon: {fileID: 21300000, guid: 48da1d830ea574a6c852da9eb04aebca, type: 3}
+    description: "\u5730\u72F1\u5B88\u536B\u5927\u997C\u7684\u6B66\u5668\uFF0C\u53EF\u80FD\u662F\u4E16\u754C\u4E0A\u552F\u4E00\u80FD\u591F\u523A\u7834\u5229\u7EF4\u5766\u575A\u786C\u76AE\u80A4\u7684\u4E1C\u897F\u3002"
+  - name: 4
+    icon: {fileID: 21300000, guid: 449b480b114bd4e629ed2485a0d16f97, type: 3}
+    description: "\u963F\u8299\u6D1B\u72C4\u5FD2\u4E4B\u5B50\u7814\u5236\u51FA\u7684\u9999\u6C14\u3002\u5373\u4F7F\u662F\u518D\u5F3A\u5927\u7684\u6076\u9B54\uFF0C\u5B83\u4E5F\u80FD\u4F7F\u5176\u9677\u5165\u6C89\u7761\u3002"
+  - name: 5
+    icon: {fileID: 21300000, guid: 9c89e293198d84cf48ce8d0ab1f1d997, type: 3}
+    description: "\u662F\u7684\uFF0C\u5F53\u7136\u662F\u7528\u6765\u76DB\u591C\u58F6\u5E94\u8BE5\u76DB\u7684\u4E1C\u897F\u7684\u4E86\uFF01"
+  - name: 6
+    icon: {fileID: 21300000, guid: 8a4d7508d5eb34a9db626b82d07523f3, type: 3}
+    description: "\u8C61\u5F81\u6C38\u6052\u5FAA\u73AF\u7684\u8F6E\u56DE\u4E4B\u76D8\u3002\u8C01\u4ECE\u4E2D\u770B\u5230\u4E86\u81EA\u5DF1\u7684\u547D\u8FD0\uFF1F"
+  - name: 7
+    icon: {fileID: 21300000, guid: 5a8f93f55d2414f03920b12f7bd4f943, type: 3}
+    description: "\u51A5\u5E9C\u56ED\u4E01\u7684\u5DE5\u5177\uFF0C\u4E0D\u8FC7\u76EE\u524D\u4E3B\u8981\u662F\u7528\u6765\u4ECE\u91D1\u5806\u4E2D\u6572\u51FA\u739B\u95E8\u3002"

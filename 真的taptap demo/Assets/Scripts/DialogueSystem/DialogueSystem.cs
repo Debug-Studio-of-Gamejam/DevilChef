@@ -44,6 +44,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     // public Image playerAvatar;
     public Image characterAvatarBack;
     public Image characterAvatarFront;
+    public Image npcAvatar;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
@@ -51,6 +52,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     [SerializeField]
     private List<SpeakerInfo> characterList = new List<SpeakerInfo>();
     private Dictionary<string, SpeakerInfo> speakerDict;
+    private List<string> npcNames = new List<string>{"三叶虫", "因诺", "大饼", "小葵", "摸摸", "牙牙乐", "蓝七"};
     
     public float textSpeed = 0.1f;
     
@@ -86,6 +88,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
             }
             else
             {
+                Debug.Log($"停止协程并直接显示完整文字 {currentDialogueId}  一共 {textList.Count} 句，现在是 {index}");
                 // 停止协程并直接显示完整文字
                 StopCoroutine(typingCoroutine);
                 targetTextLable.text = textList[index].text;
@@ -120,7 +123,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
             Debug.LogWarning($"找不到 dialogueId = {dialogueId} 的对话。");
         }
     }
-
 
     List<DialogueLine> ParseDialogue(string[] lines)
     {
@@ -167,6 +169,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowDialogueLine()
     {
         var line = textList[index];
+        Debug.Log($"显示第 {index} 句");
         switch (line.type)
         {
             case DialogueType.Normal:
@@ -174,7 +177,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 HideAvatars();
                 if (line.speakerName.StartsWith("主角"))
                 {
-                    characterName.text = "主角";
+                    characterName.text = "主角";//GameManager.Instance.playerName;
                     string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
                     if (int.TryParse(numberPart, out int index))
                     {
@@ -199,15 +202,26 @@ public class DialogueSystem : Singleton<DialogueSystem>
                     if (speakerDict.TryGetValue(line.speakerName, out var speaker))
                     {
                         characterName.text = speaker.name;
-                        if (speaker.avatarBack)
+
+                        if (npcNames.Contains(speaker.name))
                         {
-                            characterAvatarBack.gameObject.SetActive(true);
-                            characterAvatarBack.sprite = speaker.avatarBack;
+                            npcAvatar.gameObject.SetActive(true);
+                            npcAvatar.sprite = speaker.avatarFront;
+                            npcAvatar.SetNativeSize();
                         }
-                        if (speaker.avatarFront)
+                        else
                         {
-                            characterAvatarFront.gameObject.SetActive(true);
-                            characterAvatarFront.sprite = speaker.avatarFront;
+                            if (speaker.avatarBack)
+                            {
+                                characterAvatarBack.gameObject.SetActive(true);
+                                characterAvatarBack.sprite = speaker.avatarBack;
+                            }
+
+                            if (speaker.avatarFront)
+                            {
+                                characterAvatarFront.gameObject.SetActive(true);
+                                characterAvatarFront.sprite = speaker.avatarFront;
+                            }
                         }
                     }
                     else
@@ -254,6 +268,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowOptions(List<Option> options)
     {
         HideOptions();
+        isTalking = false;
         for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
             var optionObj = optionGroup[i];
@@ -291,6 +306,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAvatars()
     {
+        npcAvatar.gameObject.SetActive(false);
         characterAvatarBack.gameObject.SetActive(false);
         characterAvatarFront.gameObject.SetActive(false);
     }

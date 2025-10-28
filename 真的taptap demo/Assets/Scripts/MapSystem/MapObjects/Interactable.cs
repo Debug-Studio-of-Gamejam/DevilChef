@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
     public ItemName requiredItem;
     public bool isDone;
 
-    public int defultDialogID;
+    public int defaultDialogID;
 
     public void CheckItem(ItemName item)
     {

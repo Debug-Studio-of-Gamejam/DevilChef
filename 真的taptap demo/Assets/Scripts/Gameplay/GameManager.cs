@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("玩家数据")]
     public int currentDay = 1;
+    public string playerName = "主角";
     public int playerStamina = 100;
     public int playerSanity = 100;
     public int playerMoney = 50;
@@ -17,12 +18,8 @@ public class GameManager : Singleton<GameManager>
     public bool isPaused = false;
     public bool isInDialogue = false;
 
-    public List<Quest> quests = new List<Quest>();
-
-    void Start()
-    {
-        Debug.Log("GameManager Start 完成");
-    }
+    // public List<Quest> quests = new List<Quest>();
+    
 
     public void StartNewGame()
     {
@@ -30,9 +27,9 @@ public class GameManager : Singleton<GameManager>
 
         // 重置游戏数据
         currentDay = 1;
-        playerStamina = 100;
-        playerSanity = 100;
-        playerMoney = 50;
+        // playerStamina = 100;
+        // playerSanity = 100;
+        // playerMoney = 50;
 
         // 加载开场场景
         LoadScene("OpeningScene");
