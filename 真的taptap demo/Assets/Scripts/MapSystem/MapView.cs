@@ -2,32 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapView : MonoBehaviour
 {
     [SceneName] public string mapSceneName;
-    [SceneName] public List<string> subMapSceneNames;
-    public GameObject backButton;
-
-    private void OnEnable()
-    {
-        EventHandler.AfterSceneLoadEvent += UpdateReturnButton;
-    }
-
-    private void OnDisable()
-    {
-        EventHandler.AfterSceneLoadEvent -= UpdateReturnButton;
-    }
-
-    void UpdateReturnButton()
-    {
-        backButton.SetActive(subMapSceneNames.Contains(TransitionManager.Instance.CurrentSceneName));
-    }
-
-    public void onClickReturnButton()
-    {
-        TransitionManager.Instance.Transition(TransitionManager.Instance.CurrentSceneName, mapSceneName);
-    }
-
+    public List<Sprite> dayNumSprites;
     
+    public Image dayNumImage;
+    public GameObject backButton;
+    
+    private void Start()
+    {
+        backButton.GetComponent<Button>()?.onClick.AddListener(() => TransitionManager.Instance.Transition(TransitionManager.Instance.CurrentSceneName, mapSceneName));
+    }
+
+    public void ToggleBackButton(bool isOn)
+    {
+        backButton.SetActive(isOn);
+    }
 }

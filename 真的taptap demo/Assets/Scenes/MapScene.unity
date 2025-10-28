@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap1
 --- !u!61 &875129728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap5
 --- !u!61 &1421702634
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap4
 --- !u!61 &1506132771
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap8
 --- !u!61 &1727881481
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap6
 --- !u!61 &1961093087
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap2
 --- !u!61 &1964738966
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: MapScene
-  sceneTo: SubMap3
+  sceneTo: SubMap7
 --- !u!61 &2006325047
 BoxCollider2D:
   m_ObjectHideFlags: 0

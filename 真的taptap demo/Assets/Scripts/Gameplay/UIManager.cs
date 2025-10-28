@@ -1,34 +1,19 @@
 // UIManager.cs
+
+using System;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager Instance;
-
-    // 在Unity编辑器里把这些UI面板拖拽赋值！
-    public GameObject startMenuPanel;
+    // 在Unity编辑器里把这些UI面板拖拽赋值！ // 包括toolbar
     public GameObject settingPanel;
     public GameObject inventoryPanel; // 背包面板
     // ... 其他全局UI面板
-
-    void Awake()
+    public GameObject fadePanel;
+    
+    private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            // UIManager通常也在开始场景创建，但可以根据需要决定是否DontDestroyOnLoad
-            // 如果每个场景的UI都不同，那就不需要DontDestroyOnLoad，而是在每个场景重置引用。
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    // 显示/隐藏开始菜单
-    public void ToggleStartMenu(bool show)
-    {
-        startMenuPanel.SetActive(show);
+        fadePanel.SetActive(true);
     }
 
     // 显示/隐藏设置面板
@@ -45,4 +30,19 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.isPaused = show;
         Time.timeScale = show ? 0 : 1; // 0代表暂停，1代表正常速度
     }
+
+    // public void TogglePanelBySceneName(string newSceneName)
+    // {
+    //     
+    // }
+    //
+    // private void OnEnable()
+    // {
+    //     EventHandler.AfterSceneLoadEvent += TogglePanelBySceneName;
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     EventHandler.AfterSceneLoadEvent -= TogglePanelBySceneName;
+    // }
 }

@@ -44,6 +44,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     // public Image playerAvatar;
     public Image characterAvatarBack;
     public Image characterAvatarFront;
+    public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
     
@@ -173,6 +174,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 HideAvatars();
                 if (line.speakerName.StartsWith("主角"))
                 {
+                    characterName.text = "主角";
                     string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
                     if (int.TryParse(numberPart, out int index))
                     {
@@ -194,9 +196,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 }
                 else
                 {
-                    var speaker = speakerDict[line.speakerName];
-                    if (speaker != null)
+                    if (speakerDict.TryGetValue(line.speakerName, out var speaker))
                     {
+                        characterName.text = speaker.name;
                         if (speaker.avatarBack)
                         {
                             characterAvatarBack.gameObject.SetActive(true);
@@ -210,10 +212,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
                     }
                     else
                     {
-                        Debug.LogWarning($"没有 {line.speakerName} 的立绘信息");
+                        Debug.LogWarning($" 对话 {currentDialogueId} 未找到说话者: {line.speakerName}");
                     }
-
-
                 }
                 dialogue.SetActive(true);
                 narrator.SetActive(false);

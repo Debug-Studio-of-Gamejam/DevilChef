@@ -46,7 +46,7 @@ public class ObjectManager : Singleton<ObjectManager>
         }
     }
 
-    void OnBeforeSceneUnload()
+    void OnBeforeSceneUnload(string sceneName)
     {
         foreach (var item in FindObjectsOfType<Item>())
         {
@@ -66,7 +66,7 @@ public class ObjectManager : Singleton<ObjectManager>
         }
     }
 
-    void OnAfterSceneLoad()
+    void OnAfterSceneLoad(string sceneName)
     {
         foreach (var item in FindObjectsOfType<Item>())
         {
