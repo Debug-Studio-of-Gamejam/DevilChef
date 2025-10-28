@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: StartScene
-  sceneTo: OpeningScene
+  sceneTo: MapScene
 --- !u!1 &543033343
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,9 +865,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf29429cc3bd9d14e8cec9240236a2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenuPanel: {fileID: 0}
   settingPanel: {fileID: 0}
   inventoryPanel: {fileID: 0}
+  fadePanel: {fileID: 0}
 --- !u!114 &1466475140
 MonoBehaviour:
   m_ObjectHideFlags: 0
