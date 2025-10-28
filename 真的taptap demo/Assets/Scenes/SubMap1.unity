@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredItem: 1
   isDone: 0
+  defultDialogID: 3
 --- !u!1 &311721435
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +680,7 @@ SpriteRenderer:
   m_Size: {x: 0.28, y: 0.73}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &981313475
@@ -1231,7 +1232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1948775799
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -2,161 +2,323 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public class StringGameObjectPair
+public enum DialogueType
 {
-    public string key;
-    public GameObject value;
+    Normal,     // 普通角色对话（显示立绘+对话框）
+    Narrator,   // 旁白（全屏文字）
+    Null,       // 无立绘、仅对话框
+    Options     // 选项
 }
-public class DialogueSystem : MonoBehaviour
+
+[System.Serializable]
+public class DialogueLine
 {
-    
+    public DialogueType type;
+    public string speakerName;
+    public string text;
+    public List<int> optionIds; // 对应 Options 里的数字
+}
+
+[Serializable]
+public class SpeakerInfo
+{
+    public string name;
+    public Sprite avatarBack;
+    public Sprite avatarFront;
+}
+public class DialogueSystem : Singleton<DialogueSystem>
+{
     public GameObject dialogue;
     public GameObject narrator;
-    public GameObject option;
+    public List<GameObject> optionGroup;
+    public List<Sprite> playerAvatars;
     
     [Header("UI Elements")]
+    // public Image playerAvatar;
+    public Image characterAvatarBack;
+    public Image characterAvatarFront;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
     
     [SerializeField]
-    private List<StringGameObjectPair> characterList = new List<StringGameObjectPair>();
-    private Dictionary<string, GameObject> characterDict;
+    private List<SpeakerInfo> characterList = new List<SpeakerInfo>();
+    private Dictionary<string, SpeakerInfo> speakerDict;
     
-    [Header("测试用的文本")]
-    public TextAsset textAsset;
-
-    public int index;
     public float textSpeed = 0.1f;
-    public bool textFinished;
-    List<string> textList = new List<string>();
+    
+    private int currentDialogueId;
+    List<DialogueLine> textList = new List<DialogueLine>();
+    private TextMeshProUGUI targetTextLable;
+    private int index;
+    private bool textFinished;
+    private Coroutine typingCoroutine;
     
     void Awake()
     {
-        BuildDictionary();
-        ReadText(textAsset);
-    }
-    void Start()
-    {
-        HideAllCharacters();
-        StartCoroutine(UpdateText());
+        speakerDict = characterList.ToDictionary(s => s.name, s => s);
+        CloseDialogue();
     }
     
     void Update()
     {
-        if ((Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Space)) && textFinished)
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (index == textList.Count)
             {
-                dialogue.SetActive(false);
-                narrator.SetActive(false);
+                CloseDialogue();
                 return;
             }
 
-            if (textFinished)
+            if (!textFinished)
             {
-                StartCoroutine(UpdateText());
-            }
-            
-        }
-    }
-
-    IEnumerator UpdateText()
-    {
-        var textLable = dialogueText;
-        var currentText = textList[index];
-
-        if (characterDict != null && characterDict.ContainsKey(currentText))
-        {
-            Debug.Log(currentText);
-            HideAllCharacters();
-            if (currentText == "Narrator")
-            {
-                textLable = narratorText;
-                dialogue.SetActive(false);
-                narrator.SetActive(true);
-                
-            }
-            else if (currentText == "Option")
-            {
-                //TODO
+                // 停止协程并直接显示完整文字
+                StopCoroutine(typingCoroutine);
+                targetTextLable.text = textList[index].text;
+                textFinished = true;
+                index++;
             }
             else
             {
+                Debug.Log(index);
+                ShowDialogueLine();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 显示对话界面的入口
+    /// </summary>
+    /// <param name="dialogueId"></param>
+    public void ShowDialogue(int dialogueId)
+    {
+        currentDialogueId = dialogueId;
+        Dialogue dialogueData = DataLoader.Instance.dialogues.FirstOrDefault(d => d.dialogueId == dialogueId);
+
+        if (dialogueData != null)
+        {
+            textList.Clear();
+            index = 0;
+
+            var lineData = dialogueData.dialogueText.Split('\n');
+            textList = ParseDialogue(lineData);
+            Debug.Log($"对话 {dialogueData.dialogueId} 有 {textList.Count} 句");
+            ShowDialogueLine();
+        }
+        else
+        {
+            Debug.LogWarning($"找不到 dialogueId = {dialogueId} 的对话。");
+        }
+    }
+
+
+    List<DialogueLine> ParseDialogue(string[] lines)
+    {
+        List<DialogueLine> result = new List<DialogueLine>();
+
+        for (int i = 0; i < lines.Length; i += 2)
+        {
+            string speaker = lines[i].Trim();
+            string text = (i + 1 < lines.Length) ? lines[i + 1].Trim() : "";
+
+            DialogueLine line = new DialogueLine();
+
+            if (speaker == "Options")
+            {
+                line.type = DialogueType.Options;
+                line.optionIds = text
+                    .Split('|')
+                    .Select(s => int.Parse(s.Trim()))
+                    .ToList();
+            }
+            else if (speaker == "Narrator")
+            {
+                line.type = DialogueType.Narrator;
+                line.text = text;
+            }
+            else if (speaker == "Null")
+            {
+                line.type = DialogueType.Null;
+                line.text = text;
+            }
+            else
+            {
+                line.type = DialogueType.Normal;
+                line.speakerName = speaker;
+                line.text = text;
+            }
+
+            result.Add(line);
+        }
+
+        return result;
+    }
+    
+    void ShowDialogueLine()
+    {
+        var line = textList[index];
+        switch (line.type)
+        {
+            case DialogueType.Normal:
+                // 根据 speakerName 从字典里取 SpeakerInfo
+                HideAvatars();
+                if (line.speakerName.StartsWith("主角"))
+                {
+                    string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
+                    if (int.TryParse(numberPart, out int index))
+                    {
+                        // 安全地从列表中取立绘
+                        if (index >= 0 && index < playerAvatars.Count)
+                        {
+                            characterAvatarFront.gameObject.SetActive(true);
+                            characterAvatarFront.sprite = playerAvatars[index];
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"主角编号 {index} 超出 playerAvatars 范围！");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"无法从 {line.speakerName} 提取数字！");
+                    }
+                }
+                else
+                {
+                    var speaker = speakerDict[line.speakerName];
+                    if (speaker != null)
+                    {
+                        if (speaker.avatarBack)
+                        {
+                            characterAvatarBack.gameObject.SetActive(true);
+                            characterAvatarBack.sprite = speaker.avatarBack;
+                        }
+                        if (speaker.avatarFront)
+                        {
+                            characterAvatarFront.gameObject.SetActive(true);
+                            characterAvatarFront.sprite = speaker.avatarFront;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"没有 {line.speakerName} 的立绘信息");
+                    }
+
+
+                }
                 dialogue.SetActive(true);
                 narrator.SetActive(false);
-                characterDict[currentText].SetActive(true);
-            }
-            index++;
+                targetTextLable = dialogueText;
+                typingCoroutine = StartCoroutine(UpdateText());
+                break;
+
+            case DialogueType.Narrator:
+                dialogue.SetActive(false);
+                narrator.SetActive(true);
+                targetTextLable = narratorText;
+                typingCoroutine = StartCoroutine(UpdateText());
+                break;
+
+            case DialogueType.Null:
+                HideAvatars();
+                dialogue.SetActive(true);
+                narrator.SetActive(false);
+                targetTextLable = dialogueText;
+                typingCoroutine = StartCoroutine(UpdateText());
+                // ShowDialogueBox(null, line.text); // 无角色名
+                break;
+
+            case DialogueType.Options:
+                // 找出选项数据
+                List<Option> currentOptions = new List<Option>();
+                foreach (var id in line.optionIds)
+                {
+                    Option opt = DataLoader.Instance.options.FirstOrDefault(o => o.optionsId == id);
+                    if (opt != null)
+                        currentOptions.Add(opt);
+                }
+                ShowOptions(currentOptions);
+                break;
         }
-        
-        textLable.text = "";
-        textFinished = false;
-        for (int i = 0; i < textList[index].Length; i++)
+    }
+    
+    void ShowOptions(List<Option> options)
+    {
+        Debug.Log("Showing options");
+        HideOptions();
+        for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
-            textLable.text += textList[index][i];
+            var optionObj = optionGroup[i];
+            optionObj.SetActive(true);  // 显示这个按钮
+
+            // 设置按钮文本
+            var text = optionObj.GetComponentInChildren<TextMeshProUGUI>();
+            if (text)
+                text.text = options[i].optionText;
+
+            // 绑定点击事件（先清空旧的）
+            var button = optionObj.GetComponent<Button>();
+            if (button)
+            {
+                button.onClick.RemoveAllListeners();
+                int index = i; // 避免闭包问题
+                button.onClick.AddListener(() => OnOptionSelected(options[index]));
+            }
+        }
+    }
+
+    void OnOptionSelected(Option option)
+    {
+        HideOptions();
+        if (option.nextDialogueId == 0)
+        {
+            CloseDialogue();
+        }
+        else
+        {
+            ShowDialogue(option.nextDialogueId);
+        }
+    }
+
+    private void HideAvatars()
+    {
+        characterAvatarBack.gameObject.SetActive(false);
+        characterAvatarFront.gameObject.SetActive(false);
+    }
+
+    private void HideOptions()
+    {
+        foreach (var go in optionGroup)
+        {
+            go.SetActive(false);
+        }
+    }
+
+    private void CloseDialogue()
+    {
+        dialogue.SetActive(false);
+        narrator.SetActive(false);
+    }
+
+
+    IEnumerator UpdateText()
+    {
+        targetTextLable.text = "";
+        textFinished = false;
+        foreach (var c in textList[index].text)
+        {
+            targetTextLable.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
 
         textFinished = true;
         index++;
     }
-
-    void ReadText(TextAsset textAsset)
-    {
-        textList.Clear();
-        index = 0;
-
-        var lineData = textAsset.text.Split('\n');
-        foreach (var line in lineData)
-        {
-            textList.Add(line);
-        }
-    }
-
-    private void HideAllCharacters()
-    {
-        foreach (var go in characterDict.Values)
-        {
-            go.SetActive(false);
-        }
-    }
-
-    /// <summary>
-    /// 把objectList转换成Dictionary
-    /// </summary>
-    private void BuildDictionary()
-    {
-        characterDict = new Dictionary<string, GameObject>();
-        foreach (var pair in characterList)
-        {
-            if (string.IsNullOrEmpty(pair.key))
-            {
-                Debug.LogWarning($"空的key被忽略。");
-                continue;
-            }
-
-            if (characterDict.ContainsKey(pair.key))
-            {
-                Debug.LogWarning($"重复的key：{pair.key}");
-                continue;
-            }
-
-            characterDict.Add(pair.key, pair.value);
-        }
-    }
-
     
-#if UNITY_EDITOR
-    // ⚡ 编辑器下，当Inspector内容变化时自动重建字典，方便调试
-    private void OnValidate()
-    {
-        BuildDictionary();
-    }
-#endif
 }
