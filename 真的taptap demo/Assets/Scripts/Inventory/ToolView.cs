@@ -21,6 +21,6 @@ public class ToolView : MonoBehaviour
     private void OnUpdateItemDetails(ItemDetails details)
     {
         Debug.Log("刷新itemUI ：" + details.name);
-        itemSlot.SetItem(details);
+        itemSlot.SetTool(details);
     }
 }
