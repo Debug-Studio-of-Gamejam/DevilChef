@@ -54,40 +54,42 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public float textSpeed = 0.1f;
     
     private int currentDialogueId;
+    private bool isTalking;
     List<DialogueLine> textList = new List<DialogueLine>();
     private TextMeshProUGUI targetTextLable;
     private int index;
-    private bool textFinished;
+    private bool typingFinished;
     private Coroutine typingCoroutine;
     
     void Awake()
     {
         speakerDict = characterList.ToDictionary(s => s.name, s => s);
-        CloseDialogue();
+        HideAllDialoguePanel();
     }
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (isTalking && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
             if (index == textList.Count)
             {
-                CloseDialogue();
+                isTalking = false;
+                HideAllDialoguePanel();
+                EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
                 return;
             }
-
-            if (!textFinished)
+            
+            if (typingFinished)
+            {
+                ShowDialogueLine();
+            }
+            else
             {
                 // 停止协程并直接显示完整文字
                 StopCoroutine(typingCoroutine);
                 targetTextLable.text = textList[index].text;
-                textFinished = true;
+                typingFinished = true;
                 index++;
-            }
-            else
-            {
-                Debug.Log(index);
-                ShowDialogueLine();
             }
         }
     }
@@ -98,6 +100,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     /// <param name="dialogueId"></param>
     public void ShowDialogue(int dialogueId)
     {
+        isTalking = true;
         currentDialogueId = dialogueId;
         Dialogue dialogueData = DataLoader.Instance.dialogues.FirstOrDefault(d => d.dialogueId == dialogueId);
 
@@ -108,7 +111,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
             var lineData = dialogueData.dialogueText.Split('\n');
             textList = ParseDialogue(lineData);
-            Debug.Log($"对话 {dialogueData.dialogueId} 有 {textList.Count} 句");
+            //Debug.Log($"对话 {dialogueData.dialogueId} 有 {textList.Count} 句");
             ShowDialogueLine();
         }
         else
@@ -250,7 +253,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
     
     void ShowOptions(List<Option> options)
     {
-        Debug.Log("Showing options");
         HideOptions();
         for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
@@ -278,7 +280,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
         HideOptions();
         if (option.nextDialogueId == 0)
         {
-            CloseDialogue();
+            HideAllDialoguePanel();
+            EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
         }
         else
         {
@@ -300,25 +303,26 @@ public class DialogueSystem : Singleton<DialogueSystem>
         }
     }
 
-    private void CloseDialogue()
+    private void HideAllDialoguePanel()
     {
         dialogue.SetActive(false);
         narrator.SetActive(false);
+        HideOptions();
+        HideAvatars();
     }
 
 
     IEnumerator UpdateText()
     {
         targetTextLable.text = "";
-        textFinished = false;
+        typingFinished = false;
         foreach (var c in textList[index].text)
         {
             targetTextLable.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
 
-        textFinished = true;
+        typingFinished = true;
         index++;
     }
-    
 }

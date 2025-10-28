@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: StartScene
-  sceneTo: MapScene
+  sceneTo: OpeningScene
 --- !u!1 &543033343
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +899,7 @@ MonoBehaviour:
   currentSceneName: 
   isPaused: 0
   isInDialogue: 0
+  quests: []
 --- !u!114 &1466475142
 MonoBehaviour:
   m_ObjectHideFlags: 0

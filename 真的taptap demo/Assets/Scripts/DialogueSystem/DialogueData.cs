@@ -16,11 +16,12 @@ public class Option
     public int nextDialogueId;
 }
 
+
+[System.Serializable]
 public class Quest
 {
     public enum QuestType
     {
-        Gathering,
         Talk
     }
 
