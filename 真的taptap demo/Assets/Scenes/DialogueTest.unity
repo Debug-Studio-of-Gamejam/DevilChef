@@ -402,8 +402,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 21.33
+  m_fontSizeBase: 21.33
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 14
+  m_GlobalPointSize: 21.33
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -787,8 +787,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 21.33
+  m_fontSizeBase: 21.33
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1512,6 +1512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1825344377}
     m_Modifications:
+    - target: {fileID: 247475665892982857, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 247475667007868804, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1599,6 +1603,38 @@ PrefabInstance:
     - target: {fileID: 247475667007868807, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
       propertyPath: m_Name
       value: DialogueView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126215062271984228, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126215062271984228, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126215062271984228, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126215062271984228, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449141997216780656, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449141997216780656, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449141997216780656, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449141997216780656, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
