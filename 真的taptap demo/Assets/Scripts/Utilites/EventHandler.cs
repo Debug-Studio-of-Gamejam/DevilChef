@@ -12,30 +12,30 @@ public class EventHandler
         UpdateItemDetails?.Invoke(details);
     }
     
-    public static event Action BeforeSceneUnloadEvent;
-    public static void CallBeforeSceneUnloadEvent()
+    public static event Action<string> BeforeSceneUnloadEvent;
+    public static void CallBeforeSceneUnloadEvent(string oldScene)
     {
-        BeforeSceneUnloadEvent?.Invoke();
+        BeforeSceneUnloadEvent?.Invoke(oldScene);
     }
     
-    public static event Action AfterSceneLoadEvent;
-    public static void CallAfterSceneLoadEvent()
+    public static event Action<string> AfterSceneLoadEvent;
+    public static void CallAfterSceneLoadEvent(string newScene)
     {
-        AfterSceneLoadEvent?.Invoke();
+        AfterSceneLoadEvent?.Invoke(newScene);
     }
     
     public static event Action<ItemDetails,bool> ItemSelectedEvent;
 
     public static void CallItemSelectedEvent(ItemDetails details, bool selected)
     {
-        ItemSelectedEvent.Invoke(details, selected);
+        ItemSelectedEvent?.Invoke(details, selected);
     }
     
     public static event Action<int> DialogueFinishedEvent;
 
     public static void CallIDialogueFinishedEvent(int dialogueID)
     {
-        DialogueFinishedEvent.Invoke(dialogueID);
+        DialogueFinishedEvent?.Invoke(dialogueID);
     }
     
 
