@@ -23,7 +23,7 @@ public class DataLoader: Singleton<DataLoader>
         FileInfo fileInfo = new FileInfo(path);
         using (ExcelPackage package = new ExcelPackage(fileInfo))
         {
-            Debug.Log($"表格数量 : {package.Workbook.Worksheets.Count}");
+            //Debug.Log($"表格数量 : {package.Workbook.Worksheets.Count}");
             ReadDialogue(package.Workbook.Worksheets[1]);
             ReadOptions(package.Workbook.Worksheets[2]);
             // 示例
