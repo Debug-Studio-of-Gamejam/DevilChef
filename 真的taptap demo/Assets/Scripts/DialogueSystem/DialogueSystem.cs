@@ -64,7 +64,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     private bool typingFinished;
     private Coroutine typingCoroutine;
     
-    protected override void Awake()
+    void Awake()
     {
         speakerDict = characterList.ToDictionary(s => s.name, s => s);
         HideAllDialoguePanel();
