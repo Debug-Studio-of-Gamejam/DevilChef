@@ -44,5 +44,19 @@ public class EventHandler
         DialogueFinishedEvent?.Invoke(dialogueID);
     }
     
+    public static event Action<int> SelectDialogueOptionEvent;
+
+    public static void CallISelectDialogueOptionEvent(int optionId)
+    {
+        SelectDialogueOptionEvent?.Invoke(optionId);
+    }
+    
+    public static event Action StartNewGameEvent;
+
+    public static void CallIStartNewGame()
+    {
+        StartNewGameEvent?.Invoke();
+    }
+    
 
 }

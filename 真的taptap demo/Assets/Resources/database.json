@@ -52,7 +52,7 @@
     },
     "107": {
       "dialogueId": 107,
-      "dialogueText": "别西卜\n第七道菜是玛门的眼泪。\n主角6\n这是我最喜欢的恶魔角色之一。\n主角7\n这道菜应该是酒，或许寻找一些香料能够调配出美妙的味道。\n",
+      "dialogueText": "别西卜\n第七道菜是玛门的眼泪。\n主角6\n这是我最喜欢的恶魔角色之一。\n主角7\n这道菜应该是酒，或许寻找一些香料能够调配出美妙的味道。",
       "description": "第六道菜评分通过后显示\n对话结束后跳转对话920"
     },
     "210": {
@@ -484,6 +484,11 @@
       "dialogueId": 921,
       "dialogueText": "Narrator\n多么天真可爱、盲目轻信的小女孩……\nNarrator\n我们都有些不忍心了呢。\nNarrator\n你以为的这个世界的bug真的是bug吗？\nNarrator\n亲爱的，你是我们生产出来的，专为这个游戏世界打造的bug。\nNarrator\n在更高的维度，我们始终掌控着你的命运……",
       "description": null
+    },
+    "922": {
+      "dialogueId": 922,
+      "dialogueText": "因诺\n还是做出了这样的决定吗？\n因诺\n或许这就是命运吧。",
+      "description": null
     }
   },
   "options": {
@@ -814,7 +819,7 @@
     "922": {
       "optionsId": 922,
       "optionText": "不跟她走",
-      "nextDialogueId": 0,
+      "nextDialogueId": 922,
       "getItemId": null
     },
     "999": {
