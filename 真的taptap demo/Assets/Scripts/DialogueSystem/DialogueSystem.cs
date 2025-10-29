@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -70,17 +68,20 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void Awake()
     {
         speakerDict = characterList.ToDictionary(s => s.name, s => s);
+    }
+
+    private void Start()
+    {
         HideAllDialoguePanel();
     }
-    
+
     void Update()
     {
         if (GameManager.Instance.isTalking && !waitingForOption && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
             if (index == textList.Count)
             {
-                HideAllDialoguePanel();
-                EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
+                FinishDialogue();
                 return;
             }
             
@@ -101,6 +102,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     public void ShowMessage(string text)
     {
+        GameManager.Instance.isTalking = true;
         textList.Clear();
         index = 0;
         currentDialogueId = -1;
@@ -302,7 +304,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
             var optionObj = optionGroup[i];
             optionObj.SetActive(true);  // 显示这个按钮
             
-            Debug.Log( $"显示选项 {options[i].optionsId} 下一个对话 {options[i].nextDialogueId}, 获得道具 {options[i].getItemId} 内容 :{options[i].optionText}");
+            // Debug.Log( $"显示选项 {options[i].optionsId} 下一个对话 {options[i].nextDialogueId}, 获得道具 {options[i].getItemId} 内容 :{options[i].optionText}");
             // 设置按钮文本
             var text = optionObj.GetComponentInChildren<TextMeshProUGUI>();
             if (text)
@@ -325,8 +327,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
         waitingForOption = false;
         if (option.nextDialogueId == 0)
         {
-            HideAllDialoguePanel();
-            EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
+            FinishDialogue();
         }
         else
         {
@@ -340,18 +341,13 @@ public class DialogueSystem : Singleton<DialogueSystem>
             InventoryManager.Instance.AddItem(itemName);
         }
     }
-    
-    public void AddItemByName(string itemNameStr)
+
+    private void FinishDialogue()
     {
-        if (Enum.TryParse<ItemName>(itemNameStr, out var item))
-        {
-            // items.Add(item);
-            Debug.Log($"获得物品：{item}");
-        }
-        else
-        {
-            Debug.LogWarning($"未找到物品名：{itemNameStr}");
-        }
+        HideAllDialoguePanel();
+        GameManager.Instance.isTalking = false;
+        Debug.Log($"结束对话 {currentDialogueId}");
+        EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
     }
 
     private void HideAvatars()
@@ -371,7 +367,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAllDialoguePanel()
     {
-        GameManager.Instance.isTalking = false;
         dialogue.SetActive(false);
         narrator.SetActive(false);
         HideOptions();

@@ -11,23 +11,36 @@ public class Interactable : MonoBehaviour
     private CharacterEvent characterEvent;
     
     [Header("物品交互")]
-    public ItemName requiredItem;
     public bool isDone;
 
     private void Start()
     {
-        characterEvent = DataLoader.Instance.characterEvents[characterName];
+        if (characterName != CharacterName.None)
+        {
+            characterEvent = DataLoader.Instance.characterEvents[characterName];
+        }
     }
 
     public void CheckItem(ItemName item)
     {
-        if (item == requiredItem && !isDone)
+        if (item == characterEvent.requiredItem)
         {
-            isDone = true;
-            OnClickAction();
+            if (!isDone)
+            {
+                isDone = true;
+                OnClickAction();
+            }
+            else
+            {
+                DialogueSystem.Instance.ShowMessage($" 已经对“{characterName}”使用过了“{item}”，无法再获得更多”{characterEvent.rewardIngredient}“");
+            }
         }
-        //TODO : 错误的物品
-        DialogueSystem.Instance.ShowMessage($"无法对 {characterName} 使用 {item}");
+        else
+        {
+            DialogueSystem.Instance.ShowMessage($"无法对“{characterName}”使用“{item}”");
+        }
+        
+        
     }
 
     /// <summary>
@@ -35,8 +48,8 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public virtual void OnClickAction()
     {
-        Debug.Log("对 [" + gameObject.name +  "] 正确使用道具 : " + requiredItem);
-        
+        InventoryManager.Instance.AddIngredient(characterEvent.rewardIngredient);
+        DialogueSystem.Instance.ShowMessage($"获得了“{characterEvent.rewardIngredient}”");;
     }
 
     /// <summary>
