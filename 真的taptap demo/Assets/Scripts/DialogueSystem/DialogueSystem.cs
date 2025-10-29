@@ -200,6 +200,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                     if (int.TryParse(numberPart, out int index))
                     {
                         // 安全地从列表中取立绘
+                        index--;
                         if (index >= 0 && index < playerAvatars.Count)
                         {
                             characterAvatarFront.gameObject.SetActive(true);

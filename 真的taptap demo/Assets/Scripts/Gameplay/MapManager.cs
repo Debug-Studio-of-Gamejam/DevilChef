@@ -32,16 +32,21 @@ public class MapManager : MonoBehaviour
 
     void OnStartDialogue(int id)
     {
-        inventoryButton.SetActive(false);
-        toolPanel.SetActive(false);
-        
+        var currentScene = TransitionManager.Instance.CurrentSceneName;
+        if (currentScene == mapSceneName || subMapSceneNames.Contains(currentScene)){
+            inventoryButton.SetActive(false);
+            toolPanel.SetActive(false);
+        }
     }
     
     void OnFinishDialogue(int id)
     {
-        inventoryButton.SetActive(true);
-        toolPanel.SetActive(true);
-        toolView.UpdateItemSlots();
+        var currentScene = TransitionManager.Instance.CurrentSceneName;
+        if (currentScene == mapSceneName || subMapSceneNames.Contains(currentScene)){
+            inventoryButton.SetActive(true);
+            toolPanel.SetActive(true);
+            toolView.UpdateItemSlots();
+        }
     }
     
 
