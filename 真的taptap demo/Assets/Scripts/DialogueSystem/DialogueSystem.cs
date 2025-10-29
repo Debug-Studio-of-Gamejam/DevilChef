@@ -247,7 +247,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
                                     characterAvatarFront.sprite = speaker.avatarFront;
                                 }
                             }
-                            
                         }
                         else
                         {
@@ -326,6 +325,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     {
         HideOptions();
         waitingForOption = false;
+        EventHandler.CallISelectDialogueOptionEvent(option.optionsId);
         if (option.nextDialogueId == 0)
         {
             FinishDialogue();

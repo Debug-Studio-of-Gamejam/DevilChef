@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,24 @@ public class InventoryManager : Singleton<InventoryManager>
     public IngredientDataListSO ingredientData;
     
     //玩家拥有的道具和食材
-    public List<ItemName> items;
-    public List<IngredientEntry> ingredients = new();
-    
+    public List<ItemName> items = new List<ItemName>();
+    public List<IngredientEntry> ingredients = new List<IngredientEntry>();
+    private void OnEnable()
+    {
+        EventHandler.StartNewGameEvent += OnStartNewGame;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.StartNewGameEvent -= OnStartNewGame;
+    }
+
+    private void OnStartNewGame()
+    {
+        items.Clear();
+        ingredients.Clear();
+    }
+
     public void AddItem(ItemName itemName)
     {
         if (!items.Contains(itemName))
@@ -51,4 +67,6 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
     }
+
+    
 }

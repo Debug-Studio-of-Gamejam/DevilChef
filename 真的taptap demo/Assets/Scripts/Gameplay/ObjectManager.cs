@@ -18,13 +18,14 @@ public class ObjectManager : Singleton<ObjectManager>
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnload;
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoad;
         EventHandler.GetNewItemEvent += OnPickItem;
+        EventHandler.StartNewGameEvent += OnStartNewGame;
     }
 
     private void OnDisable()
     {
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnload;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoad;
-        EventHandler.GetNewItemEvent -= OnPickItem;
+        EventHandler.StartNewGameEvent -= OnStartNewGame;
     }
 
     void OnPickItem(ItemName itemName)
@@ -34,7 +35,14 @@ public class ObjectManager : Singleton<ObjectManager>
             itemAvailableDict[itemName] = false;
         }
     }
-    
+
+    void OnStartNewGame()
+    {
+        itemAvailableDict.Clear();
+        interactableDict.Clear();
+        ingredientAvailableDict.Clear();
+    }
+
     //
     public void OnPickIngredient(string objectName)
     {

@@ -16,10 +16,7 @@ public class CursorManager : Singleton<CursorManager>
 
     void Update()
     {
-        if (GameManager.Instance.isPaused || GameManager.Instance.isTalking)
-        {
-            return;
-        }
+
         canClick = ObjectAtMousePosition();
 
         if (holdItem)
@@ -29,6 +26,12 @@ public class CursorManager : Singleton<CursorManager>
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (GameManager.Instance.isPaused || GameManager.Instance.isTalking)
+            {
+                Debug.Log("游戏已停止");
+                return;
+            }
+            
             if (canClick)
             {
                 var go = ObjectAtMousePosition().gameObject;

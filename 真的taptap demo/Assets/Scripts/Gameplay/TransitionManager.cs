@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 public class TransitionManager : Singleton<TransitionManager>
 {
     [SceneName] public string startSceneName;
+    [SceneName] public string OpenningSceneName; 
+    [SceneName] public string gameEndSceneName;
+    [SceneName] public string mapSceneName;
     public CanvasGroup canvasGroup;
     public float fadeDuration;
     bool isFading = false;
@@ -17,6 +20,31 @@ public class TransitionManager : Singleton<TransitionManager>
     private void Start()
     {
         Transition(string.Empty, startSceneName);
+    }
+    
+    public void ReturnToStartScene()
+    {
+        Transition(CurrentSceneName, startSceneName);
+    }
+    
+    public void TransitionToOpenning()
+    {
+        if(CurrentSceneName == startSceneName)
+            Transition(CurrentSceneName, OpenningSceneName);
+        else
+        {
+            Debug.LogWarning($"从 {CurrentSceneName} 进入开场动画");
+        }
+    }
+
+    public void BackToMapScene()
+    {
+        Transition(CurrentSceneName, mapSceneName);
+    }
+    
+    public void TransitionToEndScene()
+    {
+        Transition(CurrentSceneName, gameEndSceneName);
     }
 
     public void Transition(string fromSceneName, string toSceneName)
@@ -59,4 +87,6 @@ public class TransitionManager : Singleton<TransitionManager>
         isFading = false;
         
     }
+
+
 }
