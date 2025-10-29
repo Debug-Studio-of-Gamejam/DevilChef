@@ -17,21 +17,21 @@ public class ObjectManager : Singleton<ObjectManager>
     {
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnload;
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoad;
-        EventHandler.UpdateItemDetails += OnPickItem;
+        EventHandler.GetNewItemEvent += OnPickItem;
     }
 
     private void OnDisable()
     {
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnload;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoad;
-        EventHandler.UpdateItemDetails -= OnPickItem;
+        EventHandler.GetNewItemEvent -= OnPickItem;
     }
 
-    void OnPickItem(ItemDetails details)
+    void OnPickItem(ItemName itemName)
     {
-        if (details != null && itemAvailableDict.ContainsKey(details.name))
+        if (itemAvailableDict.ContainsKey(itemName))
         {
-            itemAvailableDict[details.name] = false;
+            itemAvailableDict[itemName] = false;
         }
     }
     

@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EventHandler
 {
-    public static event Action<ItemDetails> UpdateItemDetails;
+    public static event Action<ItemName> GetNewItemEvent;
 
-    public static void CallUpdateItemDetails(ItemDetails details)
+    public static void CallGetNewItemEvent(ItemName itemName)
     {
-        UpdateItemDetails?.Invoke(details);
+        GetNewItemEvent?.Invoke(itemName);
     }
     
     public static event Action<string> BeforeSceneUnloadEvent;

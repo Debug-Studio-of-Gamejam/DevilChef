@@ -65,6 +65,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     private int index;
     private bool typingFinished;
     private Coroutine typingCoroutine;
+    private bool waitingForOption  = false;
     
     void Awake()
     {
@@ -74,7 +75,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     
     void Update()
     {
-        if (GameManager.Instance.isTalking && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
+        if (GameManager.Instance.isTalking && !waitingForOption && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
             if (index == textList.Count)
             {
@@ -98,13 +99,24 @@ public class DialogueSystem : Singleton<DialogueSystem>
         }
     }
 
+    public void ShowMessage(string text)
+    {
+        textList.Clear();
+        index = 0;
+        currentDialogueId = -1;
+        DialogueLine messageLine = new DialogueLine();
+        messageLine.type = DialogueType.Null;
+        messageLine.text = text;
+        textList.Add(messageLine);
+        ShowDialogueLine();
+    }
+
     /// <summary>
     /// 显示对话界面的入口
     /// </summary>
     /// <param name="dialogueId"></param>
     public void ShowDialogue(int dialogueId)
     {
-        
         GameManager.Instance.isTalking = true;
         currentDialogueId = dialogueId;
         GameManager.Instance.triggeredDialogues.Add(dialogueId);
@@ -115,6 +127,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
         {
             textList.Clear();
             index = 0;
+            Debug.Log($"开始 {dialogueId} 对话");
 
             var lineData = dialogueData.dialogueText.Split('\n');
             textList = ParseDialogue(lineData);
@@ -257,13 +270,13 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 break;
 
             case DialogueType.Null:
+                // 无角色名
                 HideAvatars();
                 dialogue.SetActive(true);
                 narrator.SetActive(false);
                 characterNameLable.gameObject.SetActive(false);
                 targetTextLable = dialogueText;
                 typingCoroutine = StartCoroutine(UpdateText());
-                // ShowDialogueBox(null, line.text); // 无角色名
                 break;
 
             case DialogueType.Options:
@@ -283,12 +296,13 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowOptions(List<Option> options)
     {
         HideOptions();
-        GameManager.Instance.isTalking = false;
+        waitingForOption = true;
         for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
             var optionObj = optionGroup[i];
             optionObj.SetActive(true);  // 显示这个按钮
-
+            
+            Debug.Log( $"显示选项 {options[i].optionsId} 下一个对话 {options[i].nextDialogueId}, 获得道具 {options[i].getItemId} 内容 :{options[i].optionText}");
             // 设置按钮文本
             var text = optionObj.GetComponentInChildren<TextMeshProUGUI>();
             if (text)
@@ -308,6 +322,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void OnOptionSelected(Option option)
     {
         HideOptions();
+        waitingForOption = false;
         if (option.nextDialogueId == 0)
         {
             HideAllDialoguePanel();
@@ -318,6 +333,12 @@ public class DialogueSystem : Singleton<DialogueSystem>
             ShowDialogue(option.nextDialogueId);
         }
 
+        
+        if (!string.IsNullOrEmpty(option.getItemId) && Enum.TryParse(option.getItemId, out ItemName itemName))
+        {
+            Debug.Log($"通过选项获得道具 {itemName} ");
+            InventoryManager.Instance.AddItem(itemName);
+        }
     }
     
     public void AddItemByName(string itemNameStr)
