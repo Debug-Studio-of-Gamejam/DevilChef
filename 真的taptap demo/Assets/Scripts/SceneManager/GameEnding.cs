@@ -142,12 +142,12 @@ public class GameEnding : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.DialogueFinishedEvent += OnDialogueFinished;
-        EventHandler.SelectDialogueOptionEvent += OnDialogueFinished;
+        // EventHandler.SelectDialogueOptionEvent += OnDialogueFinished;
     }
 
     private void OnDisable()
     {
         EventHandler.DialogueFinishedEvent -= OnDialogueFinished;
-        EventHandler.SelectDialogueOptionEvent -= OnDialogueFinished;
+        // EventHandler.SelectDialogueOptionEvent -= OnDialogueFinished;
     }
 }

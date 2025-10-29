@@ -1659,25 +1659,6 @@ MonoBehaviour:
   settingPanel: {fileID: 0}
   inventoryPanel: {fileID: 0}
   fadePanel: {fileID: 868725250}
---- !u!1 &1843328995 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8452553337577442659, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-  m_PrefabInstance: {fileID: 8452553338538309721}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1843329000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843328995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc168f8cf0f014dccb3ba81f617b3d72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneFrom: MapScene
-  sceneTo: GameEndTest
 --- !u!1 &1989802393
 GameObject:
   m_ObjectHideFlags: 0
@@ -15638,7 +15619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8452553337577442661, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8452553337577442661, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -15647,7 +15628,7 @@ PrefabInstance:
     - target: {fileID: 8452553337577442661, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1843329000}
+      objectReference: {fileID: 0}
     - target: {fileID: 8452553337577442661, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

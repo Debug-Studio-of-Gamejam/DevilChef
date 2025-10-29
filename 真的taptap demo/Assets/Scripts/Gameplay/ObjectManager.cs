@@ -25,6 +25,7 @@ public class ObjectManager : Singleton<ObjectManager>
     {
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnload;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoad;
+        EventHandler.GetNewItemEvent -= OnPickItem;
         EventHandler.StartNewGameEvent -= OnStartNewGame;
     }
 
