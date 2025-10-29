@@ -16,6 +16,10 @@ public class CursorManager : Singleton<CursorManager>
 
     void Update()
     {
+        if (GameManager.Instance.isPaused || GameManager.Instance.isTalking)
+        {
+            return;
+        }
         canClick = ObjectAtMousePosition();
 
         if (holdItem)
@@ -23,10 +27,18 @@ public class CursorManager : Singleton<CursorManager>
             cursor.rectTransform.position = Input.mousePosition;
         }
 
-        if (canClick && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            var go = ObjectAtMousePosition().gameObject;
-            ClickAction(go);
+            if (canClick)
+            {
+                var go = ObjectAtMousePosition().gameObject;
+                ClickAction(go);
+            }
+            if(holdItem)
+            {
+                EventHandler.CallItemSelectedEvent(null, false);
+            }
+            
         }
     }
 
@@ -52,6 +64,7 @@ public class CursorManager : Singleton<CursorManager>
                 if (holdItem)
                 {
                     interactable?.CheckItem(currentItem.name);
+                    //EventHandler.CallItemSelectedEvent(null, false);
                 }
                 else
                 {

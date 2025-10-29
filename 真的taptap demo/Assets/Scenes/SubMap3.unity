@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 986657341}
   m_Layer: 0
   m_Name: "\u539F\u91CE\u85CF\u7EA2\u82B1"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -655,32 +655,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &986657341
-BoxCollider2D:
+--- !u!114 &986657341
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986657337}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.57, y: 0.52}
-    newSize: {x: 0.57, y: 0.52}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.57, y: 0.52}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 9
 --- !u!1 &1108388110
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +682,7 @@ GameObject:
   - component: {fileID: 1108388114}
   m_Layer: 0
   m_Name: "\u539F\u91CE\u6469\u6D1B\u514B"
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,32 +781,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1108388114
-BoxCollider2D:
+--- !u!114 &1108388114
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108388110}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.03, y: 2.35}
-    newSize: {x: 1.03, y: 2.35}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.03, y: 2.35}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 3
+  requiredItem: 4
+  isDone: 0
 --- !u!1 &1403164670
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,10 +807,10 @@ GameObject:
   - component: {fileID: 1403164673}
   - component: {fileID: 1403164672}
   - component: {fileID: 1403164671}
-  - component: {fileID: 1403164674}
+  - component: {fileID: 1403164675}
   m_Layer: 0
   m_Name: "\u539F\u91CE\u5357\u7F8E\u9F20"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -933,32 +909,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1403164674
-BoxCollider2D:
+--- !u!114 &1403164675
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403164670}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.73, y: 0.56}
-    newSize: {x: 0.73, y: 0.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.73, y: 0.56}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 15
 --- !u!1 &1413573704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,7 +1104,7 @@ GameObject:
   - component: {fileID: 1708737585}
   m_Layer: 0
   m_Name: "\u539F\u91CE\u8702\u5DE2"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1240,32 +1203,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1708737585
-BoxCollider2D:
+--- !u!114 &1708737585
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708737581}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.71, y: 0.54}
-    newSize: {x: 0.71, y: 0.54}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 0.54}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 12
 --- !u!1 &1948775798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1314,7 @@ GameObject:
   - component: {fileID: 2065085125}
   m_Layer: 0
   m_Name: "\u539F\u91CE\u65E0\u82B1\u679C"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1463,32 +1413,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2065085125
-BoxCollider2D:
+--- !u!114 &2065085125
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065085121}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.02, y: 2.01}
-    newSize: {x: 1.02, y: 2.01}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.02, y: 2.01}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 8
 --- !u!1 &2109117593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,10 +1437,10 @@ GameObject:
   - component: {fileID: 2109117596}
   - component: {fileID: 2109117595}
   - component: {fileID: 2109117594}
-  - component: {fileID: 2109117597}
+  - component: {fileID: 2109117598}
   m_Layer: 0
-  m_Name: "\u539F\u91CEnpc"
-  m_TagString: Untagged
+  m_Name: "\u539F\u91CEnpc\u4E09\u53F6\u866B"
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1602,29 +1539,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2109117597
-BoxCollider2D:
+--- !u!114 &2109117598
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109117593}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.51, y: 1.74}
-    newSize: {x: 0.51, y: 1.74}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51, y: 1.74}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 10
+  requiredItem: 0
+  isDone: 0

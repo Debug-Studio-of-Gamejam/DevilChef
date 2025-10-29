@@ -9,8 +9,6 @@ public class Item : MonoBehaviour
     public void ItemClicked()
     {
         InventoryManager.Instance.AddItem(itemName);
-        
-        // TODO:场景中不会直接出现Item
         this.gameObject.SetActive(false);
     }
 }

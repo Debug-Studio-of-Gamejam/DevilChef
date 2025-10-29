@@ -133,9 +133,10 @@ GameObject:
   - component: {fileID: 78731506}
   - component: {fileID: 78731505}
   - component: {fileID: 78731507}
+  - component: {fileID: 78731508}
   m_Layer: 0
   m_Name: "\u6CC9\u6C34\u6CC9\u6C34"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,6 +235,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.61, y: 1.35}
   m_EdgeRadius: 0
+--- !u!114 &78731508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78731504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 18
 --- !u!1 &171946020
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,9 +343,10 @@ GameObject:
   - component: {fileID: 187838155}
   - component: {fileID: 187838154}
   - component: {fileID: 187838156}
+  - component: {fileID: 187838157}
   m_Layer: 0
-  m_Name: "\u6CC9\u6C34npc"
-  m_TagString: Untagged
+  m_Name: "\u6CC9\u6C34npc\u7259\u7259\u4E50"
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,6 +445,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.94, y: 1.02}
   m_EdgeRadius: 0
+--- !u!114 &187838157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187838153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 13
+  requiredItem: 0
+  isDone: 0
 --- !u!1 &373270934
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,9 +555,10 @@ GameObject:
   - component: {fileID: 725972908}
   - component: {fileID: 725972907}
   - component: {fileID: 725972909}
+  - component: {fileID: 725972910}
   m_Layer: 0
   m_Name: "\u6CC9\u6C34\u9F20\u5C3E\u8349"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,6 +657,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.96, y: 0.96}
   m_EdgeRadius: 0
+--- !u!114 &725972910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725972906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 17
 --- !u!1 &1104313310
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,9 +681,10 @@ GameObject:
   - component: {fileID: 1104313312}
   - component: {fileID: 1104313311}
   - component: {fileID: 1104313313}
+  - component: {fileID: 1104313314}
   m_Layer: 0
   m_Name: "\u6CC9\u6C34\u8702\u5DE2"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -738,6 +783,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.99, y: 0.58}
   m_EdgeRadius: 0
+--- !u!114 &1104313314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104313310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 12
 --- !u!1 &1169212486
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,9 +975,10 @@ GameObject:
   - component: {fileID: 1562002119}
   - component: {fileID: 1562002118}
   - component: {fileID: 1562002120}
+  - component: {fileID: 1562002121}
   m_Layer: 0
   m_Name: "\u8D1D\u5C14\u82AC\u683C"
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,6 +1077,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85, y: 1.31}
   m_EdgeRadius: 0
+--- !u!114 &1562002121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562002117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 6
+  requiredItem: 5
+  isDone: 0
 --- !u!1 &1600689703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1948775799
 SpriteRenderer:
   m_ObjectHideFlags: 0

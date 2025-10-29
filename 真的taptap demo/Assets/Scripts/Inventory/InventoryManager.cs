@@ -23,7 +23,7 @@ public class InventoryManager : Singleton<InventoryManager>
         if (!items.Contains(itemName))
         {
             items.Add(itemName);
-            EventHandler.CallUpdateItemDetails(itemData.GetItemDetails(itemName));
+            EventHandler.CallGetNewItemEvent(itemName);
         }
     }
     

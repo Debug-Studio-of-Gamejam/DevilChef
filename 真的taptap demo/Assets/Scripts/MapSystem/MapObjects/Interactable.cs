@@ -27,6 +27,7 @@ public class Interactable : MonoBehaviour
             OnClickAction();
         }
         //TODO : 错误的物品
+        DialogueSystem.Instance.ShowMessage($"无法对 {characterName} 使用 {item}");
     }
 
     /// <summary>
@@ -35,7 +36,7 @@ public class Interactable : MonoBehaviour
     public virtual void OnClickAction()
     {
         Debug.Log("对 [" + gameObject.name +  "] 正确使用道具 : " + requiredItem);
-        EventHandler.CallItemSelectedEvent(null, false);
+        
     }
 
     /// <summary>
@@ -43,7 +44,6 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public virtual void Interact()
     {
-        Debug.Log($"点击 {characterName}");
         if (characterEvent == null)
         {
             Debug.LogWarning($"Interactable {characterName} 没有关联的 CharacterEvent。");

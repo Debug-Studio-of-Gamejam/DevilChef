@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: StartScene
-  sceneTo: OpeningScene
+  sceneTo: MapScene
 --- !u!1 &543033343
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +899,7 @@ MonoBehaviour:
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
+  isTalking: 0
 --- !u!114 &1466475142
 MonoBehaviour:
   m_ObjectHideFlags: 0

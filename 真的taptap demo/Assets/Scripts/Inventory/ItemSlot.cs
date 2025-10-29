@@ -10,9 +10,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     
     public Image image;
     public ItemDetails currentItemDetails;
-    
-    // TODO： 改用 toggle group来管理吗?
-    bool isSelected = false;
+    // bool isSelected = false;
 
     public void SetItem(ItemDetails itemDetails)
     {
@@ -28,8 +26,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        isSelected = !isSelected;
-        EventHandler.CallItemSelectedEvent(currentItemDetails, isSelected);
+        // isSelected = !isSelected;
+        EventHandler.CallItemSelectedEvent(currentItemDetails, true);
     }
 
     // TODO: 显示道具说明

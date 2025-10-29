@@ -276,9 +276,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1896812877
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 1845333961
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c51136ff75d334d3780c59906716bef1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -469,11 +469,11 @@ GameObject:
   - component: {fileID: 1309834822}
   - component: {fileID: 1309834821}
   - component: {fileID: 1309834824}
-  - component: {fileID: 1309834823}
   - component: {fileID: 1309834825}
+  - component: {fileID: 1309834826}
   m_Layer: 0
-  m_Name: "\u4FA7\u6BBFnpc"
-  m_TagString: Untagged
+  m_Name: "\u4FA7\u6BBFnpc\u5C0F\u8475"
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -546,32 +546,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1309834823
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309834820}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 1.79}
-    newSize: {x: 0.8, y: 1.79}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.5}
-  m_EdgeRadius: 0
 --- !u!111 &1309834824
 Animation:
   m_ObjectHideFlags: 0
@@ -613,6 +587,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1.79}
   m_EdgeRadius: 0
+--- !u!114 &1309834826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309834820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 14
+  requiredItem: 0
+  isDone: 0
 --- !u!1 &1600689703
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,9 +697,10 @@ GameObject:
   - component: {fileID: 1778606760}
   - component: {fileID: 1778606759}
   - component: {fileID: 1778606761}
+  - component: {fileID: 1778606762}
   m_Layer: 0
   m_Name: "\u739B\u95E8"
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,6 +799,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.33, y: 1.9}
   m_EdgeRadius: 0
+--- !u!114 &1778606762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778606758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 7
+  requiredItem: 7
+  isDone: 0
 --- !u!1 &1838859867
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,9 +825,10 @@ GameObject:
   - component: {fileID: 1838859869}
   - component: {fileID: 1838859868}
   - component: {fileID: 1838859870}
+  - component: {fileID: 1838859871}
   m_Layer: 0
   m_Name: "\u4FA7\u6BBF\u9152\u74F6"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,6 +927,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.54}
   m_EdgeRadius: 0
+--- !u!114 &1838859871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838859867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 10
 --- !u!1 &1948775798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,9 +1035,10 @@ GameObject:
   - component: {fileID: 2042290394}
   - component: {fileID: 2042290393}
   - component: {fileID: 2042290395}
+  - component: {fileID: 2042290396}
   m_Layer: 0
   m_Name: "\u4FA7\u6BBF\u5357\u7F8E\u9F20"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1117,3 +1137,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.37, y: 0.31}
   m_EdgeRadius: 0
+--- !u!114 &2042290396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042290392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b13cd1e4c5841c389f7a46a9af3978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: 15

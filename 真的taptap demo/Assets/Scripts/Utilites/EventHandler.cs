@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EventHandler
 {
-    public static event Action<ItemDetails> UpdateItemDetails;
+    public static event Action<ItemName> GetNewItemEvent;
 
-    public static void CallUpdateItemDetails(ItemDetails details)
+    public static void CallGetNewItemEvent(ItemName itemName)
     {
-        UpdateItemDetails?.Invoke(details);
+        GetNewItemEvent?.Invoke(itemName);
     }
     
     public static event Action<string> BeforeSceneUnloadEvent;
@@ -31,6 +31,12 @@ public class EventHandler
         ItemSelectedEvent?.Invoke(details, selected);
     }
     
+    public static event Action<int> DialogueStartdEvent;
+
+    public static void CallIDialogueStartEvent(int dialogueID)
+    {
+        DialogueStartdEvent?.Invoke(dialogueID);
+    }
     public static event Action<int> DialogueFinishedEvent;
 
     public static void CallIDialogueFinishedEvent(int dialogueID)
