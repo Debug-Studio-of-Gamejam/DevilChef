@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e94ca4bbc05ab48d292ae78f9d085e5a
+guid: 8acbae4d1167f214bbfc79b9033bc77e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,18 +90,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -117,22 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u6CC9\u6C34_0"
+      name: IMG_3876_0
       rect:
         serializedVersion: 2
-        x: 54
-        y: 12
-        width: 40
-        height: 39
+        x: 35
+        y: 20
+        width: 166
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85882899ebe20da41a6014fd1a965837
-      internalID: -487855166
+      spriteID: 6571fccc97b4d3345bb1b9b7f3544012
+      internalID: -34612663
       vertices: []
       indices: 
       edges: []
@@ -148,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\u6CC9\u6C34_0": -487855166
+      IMG_3876_0: -34612663
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

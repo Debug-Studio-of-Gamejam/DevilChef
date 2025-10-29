@@ -35,4 +35,20 @@ public class InventoryManager : Singleton<InventoryManager>
         else
             ingredients[i] = new IngredientEntry { name = name, amount = ingredients[i].amount + amount };
     }
+    public void ConsumeIngredient(IngredientName name, int amount = 1)
+    {
+        var i = ingredients.FindIndex(e => e.name == name);
+        if (i != -1)
+        {
+            int newAmount = ingredients[i].amount - amount;
+            if (newAmount > 0)
+            {
+                ingredients[i] = new IngredientEntry { name = name, amount = newAmount };
+            }
+            else
+            {
+                ingredients.RemoveAt(i);
+            }
+        }
+    }
 }

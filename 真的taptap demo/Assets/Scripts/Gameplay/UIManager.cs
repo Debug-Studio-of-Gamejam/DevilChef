@@ -13,7 +13,7 @@ public class UIManager : Singleton<UIManager>
     
     private void Start()
     {
-        fadePanel.SetActive(true);
+        //fadePanel.SetActive(true);
     }
 
     // 显示/隐藏设置面板
