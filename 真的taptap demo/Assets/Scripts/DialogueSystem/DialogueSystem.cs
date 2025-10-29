@@ -352,23 +352,34 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAvatars()
     {
-        npcAvatar.gameObject.SetActive(false);
-        characterAvatarBack.gameObject.SetActive(false);
-        characterAvatarFront.gameObject.SetActive(false);
+        if (npcAvatar != null) npcAvatar.gameObject.SetActive(false);
+        if (characterAvatarBack != null) characterAvatarBack.gameObject.SetActive(false);
+        if (characterAvatarFront != null) characterAvatarFront.gameObject.SetActive(false);
     }
 
     private void HideOptions()
     {
+        if (optionGroup == null) return;
+
         foreach (var go in optionGroup)
         {
-            go.SetActive(false);
+            if (go != null)
+            {
+                go.SetActive(false);
+            }
         }
     }
 
     private void HideAllDialoguePanel()
     {
-        dialogue.SetActive(false);
-        narrator.SetActive(false);
+        if (dialogue != null)
+        {
+            dialogue.SetActive(false);
+        }
+        if (narrator != null)
+        {
+            narrator.SetActive(false);
+        }
         HideOptions();
         HideAvatars();
     }
