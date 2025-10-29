@@ -217,9 +217,10 @@ GameObject:
   - component: {fileID: 547418864}
   - component: {fileID: 547418863}
   - component: {fileID: 547418865}
+  - component: {fileID: 547418866}
   m_Layer: 0
   m_Name: "\u6CB3\u6D41\u5357\u7F8E\u9F20"
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,6 +319,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.34}
   m_EdgeRadius: 0
+--- !u!114 &547418866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547418862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 0
+  requiredItem: 0
+  isDone: 0
 --- !u!1 &662130048
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,9 +513,10 @@ GameObject:
   - component: {fileID: 929985379}
   - component: {fileID: 929985378}
   - component: {fileID: 929985380}
+  - component: {fileID: 929985381}
   m_Layer: 0
-  m_Name: "\u6CB3\u6D41npc"
-  m_TagString: Untagged
+  m_Name: "\u6CB3\u6D41npc\u56E0\u8BFA"
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,6 +615,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67, y: 1.4}
   m_EdgeRadius: 0
+--- !u!114 &929985381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929985377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 11
+  requiredItem: 0
+  isDone: 0
 --- !u!1 &1449439129
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +726,7 @@ GameObject:
   - component: {fileID: 1581982588}
   - component: {fileID: 1581982590}
   m_Layer: 0
-  m_Name: "\u6CB3\u6D41\u6F29\u6DA1"
+  m_Name: "\u6CB3\u6D41\u6F29\u6DA1(\u7279\u6B8A\u663E\u793A\u5229\u7EF4\u5766)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

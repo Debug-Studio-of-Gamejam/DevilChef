@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 2
   requiredItem: 1
-  isDone: 1
+  isDone: 0
 --- !u!1 &1227500169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,9 +1311,10 @@ GameObject:
   - component: {fileID: 1418727349}
   - component: {fileID: 1418727348}
   - component: {fileID: 1418727350}
+  - component: {fileID: 1418727351}
   m_Layer: 0
-  m_Name: "\u70BC\u72F1npc"
-  m_TagString: Untagged
+  m_Name: "\u70BC\u72F1npc\u5927\u997C"
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1412,6 +1413,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.53, y: 1.79}
   m_EdgeRadius: 0
+--- !u!114 &1418727351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418727347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c918854a5bddb41febddd60237c040a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 9
+  requiredItem: 0
+  isDone: 0
 --- !u!1 &1600689703
 GameObject:
   m_ObjectHideFlags: 0
