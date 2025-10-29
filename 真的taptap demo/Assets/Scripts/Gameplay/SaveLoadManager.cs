@@ -38,7 +38,7 @@ public class SaveLoadManager : MonoBehaviour
     {
         // 1. 创建一个存档数据对象，并从GameManager中获取当前数据
         GameData data = new GameData();
-        data.savedDay = GameManager.Instance.currentDay;
+        data.savedDay = GameManager.Instance.currentRound;
         data.savedStamina = GameManager.Instance.playerStamina;
         // ... 填充其他数据
 
@@ -63,7 +63,7 @@ public class SaveLoadManager : MonoBehaviour
             GameData data = JsonUtility.FromJson<GameData>(jsonData);
 
             // 4. 将数据写回GameManager
-            GameManager.Instance.currentDay = data.savedDay;
+            GameManager.Instance.currentRound = data.savedDay;
             GameManager.Instance.playerStamina = data.savedStamina;
             // ... 加载其他数据
 

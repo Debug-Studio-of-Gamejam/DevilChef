@@ -6,5 +6,6 @@ public enum ItemName
 public enum IngredientName
 {
     None, 香槟酒,
+	 蟾蜍原液,
 }
- 
+

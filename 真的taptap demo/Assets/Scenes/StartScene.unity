@@ -893,13 +893,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 1
+  playerName: 0
   playerStamina: 100
   playerSanity: 100
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
-  isInDialogue: 0
-  quests: []
 --- !u!114 &1466475142
 MonoBehaviour:
   m_ObjectHideFlags: 0
