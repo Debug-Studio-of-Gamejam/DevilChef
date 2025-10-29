@@ -1,13 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Interactable : MonoBehaviour
 {
+    [Header("角色对话")]
+    public CharacterName characterName;
+    private CharacterEvent characterEvent;
+    
+    [Header("物品交互")]
     public ItemName requiredItem;
     public bool isDone;
 
-    public int defaultDialogID;
+    private void Start()
+    {
+        characterEvent = DataLoader.Instance.characterEvents[characterName];
+    }
 
     public void CheckItem(ItemName item)
     {
@@ -33,7 +43,36 @@ public class Interactable : MonoBehaviour
     /// </summary>
     public virtual void Interact()
     {
-        Debug.Log("没有选择道具直接点击 :" + gameObject.name);
-    }
+        Debug.Log($"点击 {characterName}");
+        if (characterEvent == null)
+        {
+            Debug.LogWarning($"Interactable {characterName} 没有关联的 CharacterEvent。");
+            return;
+        }
 
+        int dialogueToShow = DetermineDialogueID();
+        DialogueSystem.Instance.ShowDialogue(dialogueToShow);
+    }
+    
+    private int DetermineDialogueID()
+    {
+        // 1. 如果当前轮次 == 条件轮次
+        var currentRound = GameManager.Instance.currentRound;
+        if (currentRound == characterEvent.conditionRound)
+        {
+            if (GameManager.Instance.triggeredDialogues.Contains(characterEvent.requiredDialogueID))
+            {
+                return characterEvent.successDialogueID;
+            }
+        }
+
+        // 2. 如果当前轮次在 specialRounds 中
+        if (characterEvent.specialRounds.Contains(currentRound))
+        {
+            return characterEvent.specialDialogueID;
+        }
+
+        // 3. 否则返回 normalDialogueID
+        return characterEvent.normalDialogueID;
+    }
 }

@@ -1,13 +1,13 @@
 public enum ItemName
 {
-    None,
-	 地狱弯刀,
-	 古希腊陶罐,
-	 混沌三叉戟,
-	 厄洛斯之香,
-	 狮鹫夜壶,
-	 乌洛波洛斯之盘,
-	 金十字镐
+	None,
+	地狱弯刀,
+	古希腊陶罐,
+	混沌三叉戟,
+	厄洛斯之香,
+	狮鹫夜壶,
+	乌洛波洛斯之盘,
+	金十字镐
 }
 
 public enum IngredientName
@@ -32,6 +32,24 @@ public enum IngredientName
 	 鼠尾草,
 	 亡灵泉水,
 	 缩序杜若
-
 }
- 
+
+public enum CharacterName
+{
+	None, 
+	别西卜,
+	阿斯摩太,
+	摩洛克,
+	利维坦,
+	巴力,
+	贝尔芬格,
+	玛门,
+	撒旦,
+	大饼,
+	三叶虫,
+	因诺,
+	摸摸,
+	牙牙乐,
+	小葵,
+	蓝七
+}

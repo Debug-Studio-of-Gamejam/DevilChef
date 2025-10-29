@@ -892,15 +892,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bd9c561b8ad6346ada4566b8cb4fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 1
+  currentRound: 1
   playerName: 0
   playerStamina: 100
   playerSanity: 100
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
-  isInDialogue: 0
-  quests: []
 --- !u!114 &1466475142
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     [Header("玩家数据")]
-    public int currentDay = 1;
+    public int currentRound = 1;
     public string playerName = "主角";
     public int playerStamina = 100;
     public int playerSanity = 100;
@@ -16,9 +17,8 @@ public class GameManager : Singleton<GameManager>
     [Header("游戏状态")]
     public string currentSceneName;
     public bool isPaused = false;
-    public bool isInDialogue = false;
+    public HashSet<int> triggeredDialogues = new HashSet<int>();
 
-    // public List<Quest> quests = new List<Quest>();
     
 
     public void StartNewGame()
@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("开始新游戏，重置数据...");
 
         // 重置游戏数据
-        currentDay = 1;
+        currentRound = 1;
         // playerStamina = 100;
         // playerSanity = 100;
         // playerMoney = 50;
@@ -85,12 +85,12 @@ public class GameManager : Singleton<GameManager>
 
     public void StartNewDay()
     {
-        currentDay++;
+        currentRound++;
         playerStamina = 100;
 
-        Debug.Log("新的一天开始: 第" + currentDay + "天");
+        Debug.Log("新的一天开始: 第" + currentRound + "天");
 
-        if (currentDay > 7)
+        if (currentRound > 7)
         {
             Debug.Log("触发Demo结局");
             LoadScene("DemoEndScene");
