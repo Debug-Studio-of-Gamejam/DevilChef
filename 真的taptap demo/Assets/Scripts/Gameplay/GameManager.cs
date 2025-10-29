@@ -19,11 +19,7 @@ public class GameManager : Singleton<GameManager>
     public bool isPaused = false;
     public HashSet<int> triggeredDialogues = new HashSet<int>();
 
-
-    private void OnEnable()
-    {
-        
-    }
+    
 
     public void StartNewGame()
     {

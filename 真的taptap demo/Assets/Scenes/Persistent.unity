@@ -401,6 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues: []
   options: []
+  eventList: []
 --- !u!4 &831585492
 Transform:
   m_ObjectHideFlags: 0
@@ -1769,7 +1770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2130397254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1782,14 +1783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bd9c561b8ad6346ada4566b8cb4fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 1
+  currentRound: 1
   playerName: "\u4E3B\u89D2"
   playerStamina: 100
   playerSanity: 100
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
-  isInDialogue: 0
 --- !u!4 &2130397255
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,34 +1909,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1825344377}
     m_Modifications:
-    - target: {fileID: 3070315786644585256, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553337944822815, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553337944822815, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553337944822815, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553337944822815, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553338194044306, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 87.6413
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452553338489746210, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2caf24d5070b64399988694482a610f5, type: 3}
     - target: {fileID: 8452553338501083402, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_Name
       value: MapView

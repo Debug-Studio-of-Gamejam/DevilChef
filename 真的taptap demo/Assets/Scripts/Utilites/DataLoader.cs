@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using OfficeOpenXml;
 
@@ -10,6 +11,8 @@ public class DataLoader: Singleton<DataLoader>
 {
     public List<Dialogue> dialogues = new List<Dialogue>();
     public List<Option> options = new List<Option>();
+    public List<CharacterEvent> eventList = new List<CharacterEvent>(); 
+    public Dictionary<CharacterName, CharacterEvent> characterEvents = new Dictionary<CharacterName, CharacterEvent>();
     
     void Awake()
     {
@@ -26,6 +29,7 @@ public class DataLoader: Singleton<DataLoader>
             //Debug.Log($"表格数量 : {package.Workbook.Worksheets.Count}");
             ReadDialogue(package.Workbook.Worksheets[1]);
             ReadOptions(package.Workbook.Worksheets[2]);
+            ReadCharacterEvent(package.Workbook.Worksheets[3]);
             // 示例
             // int.TryParse(eventsheet.Cells[i, 3].Value?.ToString() ?? "0", out newEvent.humidity);
             // float.TryParse(eventsheet.Cells[i, 8].Value.ToString(), out newEvent.duration);
@@ -68,10 +72,56 @@ public class DataLoader: Singleton<DataLoader>
                 option.optionText = sheet.Cells[i, 2].Value.ToString();
                 // nextDialogueId = 0 表示结束对话
                 int.TryParse(sheet.Cells[i, 3].Value?.ToString() ?? "0", out option.nextDialogueId);
+                //TODO：防止空
+                option.getItemId = sheet.Cells[i, 4].Value?.ToString();
                 options.Add(option);
             }
         }
     }
+    
+    void ReadCharacterEvent(ExcelWorksheet eventsheet)
+    {
+        int rowCount = eventsheet.Dimension.Rows;
+        int colCount = eventsheet.Dimension.Columns;
+        Debug.Log($"eventsheet: {rowCount} 条数据，{colCount} 个字段");
+        for (int i = 3; i <= rowCount; i++)
+        {
+            //防止有空行直接跳过
+            if (eventsheet.Cells[i, 1].Value != null)
+            {
+                
+                string nameStr = eventsheet.Cells[i, 1].Value.ToString();
+                string roundsStr = eventsheet.Cells[i, 2].Value.ToString();
+
+                if (!Enum.TryParse(nameStr, out CharacterName name))
+                {
+                    Debug.LogWarning($"未知角色名：{nameStr}");
+                    continue;
+                }
+
+                List<int> specialRounds = roundsStr
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.TryParse(s, out int n) ? n : 0)
+                    .Where(n => n > 0)
+                    .ToList();
+
+                var ev = new CharacterEvent
+                {
+                    characterName = name,
+                    specialRounds = specialRounds,
+                    specialDialogueID = int.Parse(eventsheet.Cells[i, 3].Value.ToString()),
+                    normalDialogueID = int.Parse(eventsheet.Cells[i, 4].Value.ToString()),
+                    conditionRound = int.Parse(eventsheet.Cells[i, 5].Value.ToString()),
+                    requiredDialogueID = int.Parse(eventsheet.Cells[i, 6].Value.ToString()),
+                    successDialogueID = int.Parse(eventsheet.Cells[i, 7].Value.ToString())
+                };
+
+                characterEvents[name] = ev;
+                eventList.Add(ev);
+            }
+        }
+    }
+
 
 
 }

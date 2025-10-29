@@ -29,7 +29,7 @@ public class DialogueLine
 [Serializable]
 public class SpeakerInfo
 {
-    public string name;
+    public CharacterName name;
     public Sprite avatarBack;
     public Sprite avatarFront;
 }
@@ -39,20 +39,23 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public GameObject narrator;
     public List<GameObject> optionGroup;
     public List<Sprite> playerAvatars;
+    //美术图大小不同 NPC特殊处理，显示在 npcAvatar {"三叶虫", "因诺", "大饼", "小葵", "摸摸", "牙牙乐", "蓝七"};
+    public List<CharacterName> npcNames = new List<CharacterName>();
+        
     
     [Header("UI Elements")]
     // public Image playerAvatar;
     public Image characterAvatarBack;
     public Image characterAvatarFront;
     public Image npcAvatar;
-    public TextMeshProUGUI characterName;
+    public TextMeshProUGUI characterNameLable;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
     
+    [Header("立绘数据")]
     [SerializeField]
     private List<SpeakerInfo> characterList = new List<SpeakerInfo>();
-    private Dictionary<string, SpeakerInfo> speakerDict;
-    private List<string> npcNames = new List<string>{"三叶虫", "因诺", "大饼", "小葵", "摸摸", "牙牙乐", "蓝七"};
+    private Dictionary<CharacterName, SpeakerInfo> speakerDict;
     
     public float textSpeed = 0.1f;
     
@@ -88,7 +91,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
             }
             else
             {
-                Debug.Log($"停止协程并直接显示完整文字 {currentDialogueId}  一共 {textList.Count} 句，现在是 {index}");
                 // 停止协程并直接显示完整文字
                 StopCoroutine(typingCoroutine);
                 targetTextLable.text = textList[index].text;
@@ -106,6 +108,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     {
         isTalking = true;
         currentDialogueId = dialogueId;
+        GameManager.Instance.triggeredDialogues.Add(dialogueId);
         Dialogue dialogueData = DataLoader.Instance.dialogues.FirstOrDefault(d => d.dialogueId == dialogueId);
 
         if (dialogueData != null)
@@ -169,15 +172,15 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowDialogueLine()
     {
         var line = textList[index];
-        Debug.Log($"显示第 {index} 句");
         switch (line.type)
         {
             case DialogueType.Normal:
                 // 根据 speakerName 从字典里取 SpeakerInfo
                 HideAvatars();
+                characterNameLable.gameObject.SetActive(true);
                 if (line.speakerName.StartsWith("主角"))
                 {
-                    characterName.text = "主角";//GameManager.Instance.playerName;
+                    characterNameLable.text = "主角";//GameManager.Instance.playerName;
                     string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
                     if (int.TryParse(numberPart, out int index))
                     {
@@ -199,34 +202,45 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 }
                 else
                 {
-                    if (speakerDict.TryGetValue(line.speakerName, out var speaker))
+                    // 把字符串转换成 CharacterName枚举
+                    if (Enum.TryParse(line.speakerName, out CharacterName speakerName))
                     {
-                        characterName.text = speaker.name;
-
-                        if (npcNames.Contains(speaker.name))
+                        
+                        SpeakerInfo speaker = speakerDict[speakerName];
+                        characterNameLable.text = line.speakerName;
+                        if (speakerDict.ContainsKey(speakerName))
                         {
-                            npcAvatar.gameObject.SetActive(true);
-                            npcAvatar.sprite = speaker.avatarFront;
-                            npcAvatar.SetNativeSize();
+                            // NPC 的图片位置特殊处理
+                            if (npcNames.Contains(speaker.name))
+                            {
+                                npcAvatar.gameObject.SetActive(true);
+                                npcAvatar.sprite = speaker.avatarFront;
+                                npcAvatar.SetNativeSize();
+                            }
+                            else
+                            {
+                                if (speaker.avatarBack)
+                                {
+                                    characterAvatarBack.gameObject.SetActive(true);
+                                    characterAvatarBack.sprite = speaker.avatarBack;
+                                }
+
+                                if (speaker.avatarFront)
+                                {
+                                    characterAvatarFront.gameObject.SetActive(true);
+                                    characterAvatarFront.sprite = speaker.avatarFront;
+                                }
+                            }
+                            
                         }
                         else
                         {
-                            if (speaker.avatarBack)
-                            {
-                                characterAvatarBack.gameObject.SetActive(true);
-                                characterAvatarBack.sprite = speaker.avatarBack;
-                            }
-
-                            if (speaker.avatarFront)
-                            {
-                                characterAvatarFront.gameObject.SetActive(true);
-                                characterAvatarFront.sprite = speaker.avatarFront;
-                            }
+                            Debug.LogWarning($"立绘数据字典中没有找到 {speakerName}");
                         }
                     }
                     else
                     {
-                        Debug.LogWarning($" 对话 {currentDialogueId} 未找到说话者: {line.speakerName}");
+                        Debug.LogWarning($"无法把字符串 {line.speakerName} 转换成有效的 CharacterName");
                     }
                 }
                 dialogue.SetActive(true);
@@ -238,6 +252,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
             case DialogueType.Narrator:
                 dialogue.SetActive(false);
                 narrator.SetActive(true);
+                characterNameLable.gameObject.SetActive(false);
                 targetTextLable = narratorText;
                 typingCoroutine = StartCoroutine(UpdateText());
                 break;
@@ -301,6 +316,20 @@ public class DialogueSystem : Singleton<DialogueSystem>
         else
         {
             ShowDialogue(option.nextDialogueId);
+        }
+
+    }
+    
+    public void AddItemByName(string itemNameStr)
+    {
+        if (Enum.TryParse<ItemName>(itemNameStr, out var item))
+        {
+            // items.Add(item);
+            Debug.Log($"获得物品：{item}");
+        }
+        else
+        {
+            Debug.LogWarning($"未找到物品名：{itemNameStr}");
         }
     }
 
