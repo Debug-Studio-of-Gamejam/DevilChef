@@ -15,6 +15,8 @@ public struct CookingResult
 
 public class CookingManager : Singleton<CookingManager>
 {
+    public GameObject cookingPanel;
+    
     private const int MAX_BASIC_TASTE_SCORE = 40;
 
     private const int PERFORMANCE_INITIAL_SCORE = 60;
@@ -39,6 +41,11 @@ public class CookingManager : Singleton<CookingManager>
         int performanceScore = CalculatePerformanceScore(recipe, playerHeat, playerTime);
         int finalScore = basicTasteScore + performanceScore;
 
+        HideCookingPanel();
+        GameManager.Instance.OnScoreEvaluated(finalScore >= PASS_SCORE);
+        
+        
+
         return new CookingResult
         {
             basicTasteScore = basicTasteScore,
@@ -46,6 +53,8 @@ public class CookingManager : Singleton<CookingManager>
             finalScore = finalScore,
             isPass = (finalScore >= PASS_SCORE)
         };
+        
+        
     }
 
     private int CalculateBasicTasteScore(RecipeSO recipe, IngredientName mainIngredient, List<IngredientName> garnishes)
@@ -127,5 +136,17 @@ public class CookingManager : Singleton<CookingManager>
         int deviationSteps = Mathf.FloorToInt(errorPercent / TIME_DEVIATION_STEP_PERCENT);
         float factor = 1.0f - (deviationSteps * TIME_FACTOR_DROP);
         return Mathf.Max(factor, TIME_FACTOR_MIN);
+    }
+
+    public void ShowCookingPanel()
+    {
+        GameManager.Instance.isPaused = true;
+        cookingPanel.SetActive(true);
+    }
+
+    public void HideCookingPanel()
+    {
+        GameManager.Instance.isPaused = false;
+        cookingPanel.SetActive(false);
     }
 }

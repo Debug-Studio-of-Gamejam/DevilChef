@@ -96,7 +96,7 @@ public class CookingUI : MonoBehaviour
         errorPopupCloseButton?.onClick.AddListener(HideErrorPopup);
         errorPopupPanel?.SetActive(false);
 
-        //SwitchToPanel(selectionPanel);
+        SwitchToPanel(selectionPanel);
         RefreshBackpackDisplay();
     }
 
@@ -237,12 +237,13 @@ public class CookingUI : MonoBehaviour
 
     private void OnConfirmSelectionClicked()
     {
+        
         if (selectedMainIngredient == IngredientName.None || selectedGarnishes.Count == 0)
         {
             ShowErrorPopup("请至少添加一种主料和一种辅料");
             return;
         }
-
+        
         if (cookingMainImage != null)
         {
             cookingMainImage.sprite = mainIngredientImage.sprite;
@@ -309,7 +310,8 @@ public class CookingUI : MonoBehaviour
         );
         if (finalScoreText != null)
             finalScoreText.text = $"总分: {result.finalScore}";
-        SwitchToPanel(scoringPanel);
+        
+        
     }
 
     #endregion
