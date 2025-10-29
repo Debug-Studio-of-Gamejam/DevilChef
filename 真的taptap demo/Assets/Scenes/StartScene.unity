@@ -899,6 +899,7 @@ MonoBehaviour:
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
+  isTalking: 0
 --- !u!114 &1466475142
 MonoBehaviour:
   m_ObjectHideFlags: 0

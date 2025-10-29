@@ -399,8 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d617633b8fe4441ba95284280d609077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues: []
-  options: []
   eventList: []
 --- !u!4 &831585492
 Transform:
@@ -1556,8 +1554,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1457175370}
   - {fileID: 116918612}
+  - {fileID: 1457175370}
   - {fileID: 868725251}
   - {fileID: 995009754}
   m_Father: {fileID: 0}
@@ -1790,6 +1788,7 @@ MonoBehaviour:
   playerMoney: 50
   currentSceneName: 
   isPaused: 0
+  isTalking: 0
 --- !u!4 &2130397255
 Transform:
   m_ObjectHideFlags: 0
@@ -1822,7 +1821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 247475667007868804, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 247475667007868804, guid: 727d3c0158fb94bfaa9fb79567215568, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1923,7 +1922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8452553338501083405, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8452553338501083405, guid: 80892638ae70441eea905c679f8ecf87, type: 3}
       propertyPath: m_AnchorMax.x

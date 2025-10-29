@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     [Header("游戏状态")]
     public string currentSceneName;
     public bool isPaused = false;
+    public bool isTalking = false;
     public HashSet<int> triggeredDialogues = new HashSet<int>();
 
     

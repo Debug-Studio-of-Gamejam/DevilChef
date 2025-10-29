@@ -60,7 +60,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public float textSpeed = 0.1f;
     
     private int currentDialogueId;
-    private bool isTalking;
     List<DialogueLine> textList = new List<DialogueLine>();
     private TextMeshProUGUI targetTextLable;
     private int index;
@@ -75,11 +74,10 @@ public class DialogueSystem : Singleton<DialogueSystem>
     
     void Update()
     {
-        if (isTalking && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
+        if (GameManager.Instance.isTalking && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
         {
             if (index == textList.Count)
             {
-                isTalking = false;
                 HideAllDialoguePanel();
                 EventHandler.CallIDialogueFinishedEvent(currentDialogueId);
                 return;
@@ -106,10 +104,12 @@ public class DialogueSystem : Singleton<DialogueSystem>
     /// <param name="dialogueId"></param>
     public void ShowDialogue(int dialogueId)
     {
-        isTalking = true;
+        
+        GameManager.Instance.isTalking = true;
         currentDialogueId = dialogueId;
         GameManager.Instance.triggeredDialogues.Add(dialogueId);
-        Dialogue dialogueData = DataLoader.Instance.dialogues.FirstOrDefault(d => d.dialogueId == dialogueId);
+        EventHandler.CallIDialogueStartEvent(dialogueId);
+        Dialogue dialogueData = DataLoader.Instance.dialogues[dialogueId];
 
         if (dialogueData != null)
         {
@@ -252,7 +252,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
             case DialogueType.Narrator:
                 dialogue.SetActive(false);
                 narrator.SetActive(true);
-                characterNameLable.gameObject.SetActive(false);
                 targetTextLable = narratorText;
                 typingCoroutine = StartCoroutine(UpdateText());
                 break;
@@ -261,6 +260,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 HideAvatars();
                 dialogue.SetActive(true);
                 narrator.SetActive(false);
+                characterNameLable.gameObject.SetActive(false);
                 targetTextLable = dialogueText;
                 typingCoroutine = StartCoroutine(UpdateText());
                 // ShowDialogueBox(null, line.text); // 无角色名
@@ -271,7 +271,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 List<Option> currentOptions = new List<Option>();
                 foreach (var id in line.optionIds)
                 {
-                    Option opt = DataLoader.Instance.options.FirstOrDefault(o => o.optionsId == id);
+                    Option opt = DataLoader.Instance.options[id];
                     if (opt != null)
                         currentOptions.Add(opt);
                 }
@@ -283,7 +283,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void ShowOptions(List<Option> options)
     {
         HideOptions();
-        isTalking = false;
+        GameManager.Instance.isTalking = false;
         for (int i = 0; i < options.Count && i < optionGroup.Count; i++)
         {
             var optionObj = optionGroup[i];
@@ -350,6 +350,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAllDialoguePanel()
     {
+        GameManager.Instance.isTalking = false;
         dialogue.SetActive(false);
         narrator.SetActive(false);
         HideOptions();

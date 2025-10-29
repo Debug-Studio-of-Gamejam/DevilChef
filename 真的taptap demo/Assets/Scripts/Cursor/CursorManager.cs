@@ -16,6 +16,10 @@ public class CursorManager : Singleton<CursorManager>
 
     void Update()
     {
+        if (GameManager.Instance.isPaused || GameManager.Instance.isTalking)
+        {
+            return;
+        }
         canClick = ObjectAtMousePosition();
 
         if (holdItem)

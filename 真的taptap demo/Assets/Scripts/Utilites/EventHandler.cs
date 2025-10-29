@@ -31,6 +31,12 @@ public class EventHandler
         ItemSelectedEvent?.Invoke(details, selected);
     }
     
+    public static event Action<int> DialogueStartdEvent;
+
+    public static void CallIDialogueStartEvent(int dialogueID)
+    {
+        DialogueStartdEvent?.Invoke(dialogueID);
+    }
     public static event Action<int> DialogueFinishedEvent;
 
     public static void CallIDialogueFinishedEvent(int dialogueID)

@@ -9,8 +9,8 @@ using OfficeOpenXml;
 
 public class DataLoader: Singleton<DataLoader>
 {
-    public List<Dialogue> dialogues = new List<Dialogue>();
-    public List<Option> options = new List<Option>();
+    public Dictionary<int, Dialogue> dialogues = new Dictionary<int, Dialogue>();
+    public Dictionary<int, Option> options = new Dictionary<int, Option>();
     public List<CharacterEvent> eventList = new List<CharacterEvent>(); 
     public Dictionary<CharacterName, CharacterEvent> characterEvents = new Dictionary<CharacterName, CharacterEvent>();
     
@@ -52,7 +52,7 @@ public class DataLoader: Singleton<DataLoader>
                 newDialogue.dialogueId = idx;
                 newDialogue.dialogueText = dialoguesheet.Cells[i, 2].Value.ToString();
                 newDialogue.description = dialoguesheet.Cells[i, 3].Value?.ToString();
-                dialogues.Add(newDialogue);
+                dialogues[idx] = newDialogue;
             }
         }
     }
@@ -74,7 +74,7 @@ public class DataLoader: Singleton<DataLoader>
                 int.TryParse(sheet.Cells[i, 3].Value?.ToString() ?? "0", out option.nextDialogueId);
                 //TODO：防止空
                 option.getItemId = sheet.Cells[i, 4].Value?.ToString();
-                options.Add(option);
+                options[option.optionsId] = option;
             }
         }
     }
