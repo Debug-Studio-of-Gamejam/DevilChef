@@ -143,7 +143,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
             if (aoiDialogues.Contains(dialogueId))
             {
                 Debug.Log("触发小葵对话");
+                npcAnimator.enabled = true;
                 npcAnimator.Play("aoibad");
+                
             }
         }
         else
@@ -239,6 +241,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
                             // NPC 的图片位置特殊处理
                             if (npcNames.Contains(speaker.name))
                             {
+                                Debug.Log($"设置npc图片 {speaker.avatarFront.name}");
+                                npcAnimator.enabled = false;
                                 npcAvatar.gameObject.SetActive(true);
                                 npcAvatar.sprite = speaker.avatarFront;
                                 npcAvatar.SetNativeSize();
