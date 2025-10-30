@@ -35,10 +35,24 @@ public class GlobalSettingsManager : MonoBehaviour
             AudioManager.Instance.PlayButtonClick();
         }
 
+        // 记录进入设置场景前的场景
+        string currentScene = TransitionManager.Instance != null ? TransitionManager.Instance.CurrentSceneName : SceneManager.GetActiveScene().name;
+        Debug.Log($"GlobalSettingsManager.OpenSettingsScene: 当前场景: {currentScene}, UISettingsManager.Instance: {UISettingsManager.Instance != null}");
+        
+        // 记录之前场景
+        if (UISettingsManager.Instance != null)
+        {
+            UISettingsManager.Instance.SetPreviousScene(currentScene);
+        }
+        else
+        {
+            Debug.LogWarning("UISettingsManager.Instance 为 null，无法记录之前场景");
+        }
+
         // 使用TransitionManager跳转到设置场景
         if (TransitionManager.Instance != null)
         {
-            TransitionManager.Instance.Transition(TransitionManager.Instance.CurrentSceneName, "SettingScene");
+            TransitionManager.Instance.Transition(currentScene, "SettingScene");
         }
         else
         {
@@ -92,8 +106,28 @@ public class GlobalSettingsManager : MonoBehaviour
         // 使用TransitionManager返回上一个场景
         if (TransitionManager.Instance != null)
         {
-            // 这里需要记录之前场景的逻辑，暂时先返回开始场景
-            TransitionManager.Instance.ReturnToStartScene();
+            // 检查是否有记录之前场景
+            if (UISettingsManager.Instance != null)
+            {
+                string previousScene = UISettingsManager.Instance.GetPreviousScene();
+                if (!string.IsNullOrEmpty(previousScene))
+                {
+                    Debug.Log($"全局设置管理器：返回之前记录的场景 - {previousScene}");
+                    
+                    // 返回之前记录的场景
+                    TransitionManager.Instance.Transition("SettingScene", previousScene);
+                }
+                else
+                {
+                    Debug.LogWarning("全局设置管理器：没有有效的之前场景记录，返回开始场景");
+                    TransitionManager.Instance.ReturnToStartScene();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("全局设置管理器：UISettingsManager实例为空，返回开始场景");
+                TransitionManager.Instance.ReturnToStartScene();
+            }
         }
         else
         {

@@ -23,17 +23,28 @@ public class UISettingsManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"UISettingsManager.Awake: Instance is null: {Instance == null}, previousSceneName: '{previousSceneName}'");
+        
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("UISettingsManager.Awake: 创建新实例并设置DontDestroyOnLoad");
 
             // 确保面板初始隐藏
             if (settingsPanel != null)
                 settingsPanel.SetActive(false);
         }
-        else
+        else if (Instance != this)
         {
+            Debug.Log($"UISettingsManager.Awake: 已存在实例，当前previousSceneName: '{previousSceneName}', 实例previousSceneName: '{Instance.previousSceneName}'");
+            
+            // 如果已经存在实例，确保之前场景信息被保留
+            if (!string.IsNullOrEmpty(previousSceneName))
+            {
+                Instance.previousSceneName = previousSceneName;
+                Debug.Log($"UISettingsManager.Awake: 更新实例的previousSceneName为: '{previousSceneName}'");
+            }
             Destroy(gameObject);
         }
     }
@@ -177,7 +188,15 @@ public class UISettingsManager : MonoBehaviour
     public void SetPreviousScene(string sceneName)
     {
         previousSceneName = sceneName;
-        Debug.Log($"记录进入设置前的场景: {previousSceneName}");
+        Debug.Log($"UISettingsManager.SetPreviousScene: 记录进入设置前的场景: {previousSceneName}, Instance: {Instance != null}");
+    }
+    
+    /// <summary>
+    /// 获取进入设置场景前的场景名
+    /// </summary>
+    public string GetPreviousScene()
+    {
+        return previousSceneName;
     }
     
     /// <summary>
@@ -185,7 +204,7 @@ public class UISettingsManager : MonoBehaviour
     /// </summary>
     public void ReturnToPreviousScene()
     {
-        Debug.Log($"UISettingsManager：返回之前的界面，之前场景: {previousSceneName}");
+        Debug.Log($"UISettingsManager.ReturnToPreviousScene: 之前场景: '{previousSceneName}', Instance: {Instance != null}");
 
         // 播放按钮音效
         if (AudioManager.Instance != null)
@@ -202,12 +221,13 @@ public class UISettingsManager : MonoBehaviour
             if (!string.IsNullOrEmpty(previousSceneName) && previousSceneName != "SettingScene")
             {
                 // 返回之前记录的场景
+                Debug.Log($"UISettingsManager.ReturnToPreviousScene: 返回之前记录的场景: {previousSceneName}");
                 TransitionManager.Instance.Transition("SettingScene", previousSceneName);
             }
             else
             {
                 // 如果没有记录或记录无效，返回开始场景
-                Debug.LogWarning("没有有效的之前场景记录，返回开始场景");
+                Debug.LogWarning($"UISettingsManager.ReturnToPreviousScene: 没有有效的之前场景记录，返回开始场景。previousSceneName: '{previousSceneName}'");
                 TransitionManager.Instance.ReturnToStartScene();
             }
         }

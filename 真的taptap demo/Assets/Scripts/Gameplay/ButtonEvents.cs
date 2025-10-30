@@ -65,10 +65,18 @@ public class ButtonEvents : MonoBehaviour
             return;
         }
         
+        // 确保UISettingsManager实例存在
+        EnsureUISettingsManagerExists();
+        
         // 记录进入设置场景前的场景
         if (UISettingsManager.Instance != null)
         {
             UISettingsManager.Instance.SetPreviousScene(currentScene);
+            Debug.Log($"ButtonEvents.OpenSettings: 成功记录之前场景: {currentScene}");
+        }
+        else
+        {
+            Debug.LogError($"ButtonEvents.OpenSettings: UISettingsManager.Instance 为 null！无法记录之前场景: {currentScene}");
         }
         
         // 加载设置场景
@@ -83,6 +91,27 @@ public class ButtonEvents : MonoBehaviour
             Debug.LogWarning("TransitionManager.Instance 为 null，直接加载设置场景");
             // 备用方案：直接使用SceneManager
             UnityEngine.SceneManagement.SceneManager.LoadScene("SettingScene");
+        }
+    }
+    
+    /// <summary>
+    /// 确保UISettingsManager实例存在
+    /// </summary>
+    private void EnsureUISettingsManagerExists()
+    {
+        if (UISettingsManager.Instance == null)
+        {
+            Debug.Log("ButtonEvents.EnsureUISettingsManagerExists: UISettingsManager实例不存在，尝试创建");
+            
+            // 创建UISettingsManager的GameObject
+            GameObject uiSettingsManagerObj = new GameObject("UISettingsManager");
+            uiSettingsManagerObj.AddComponent<UISettingsManager>();
+            
+            Debug.Log($"ButtonEvents.EnsureUISettingsManagerExists: 创建UISettingsManager实例，现在Instance: {UISettingsManager.Instance != null}");
+        }
+        else
+        {
+            Debug.Log("ButtonEvents.EnsureUISettingsManagerExists: UISettingsManager实例已存在");
         }
     }
     
