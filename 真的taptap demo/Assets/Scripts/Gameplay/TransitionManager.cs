@@ -47,15 +47,35 @@ public class TransitionManager : Singleton<TransitionManager>
     private IEnumerator Fade(float targetAlpha)
     {
         isFading = true;
+        
+        // 检查canvasGroup是否被销毁
+        if (canvasGroup == null)
+        {
+            Debug.LogWarning("CanvasGroup已被销毁，跳过淡入淡出效果");
+            isFading = false;
+            yield break;
+        }
+        
         canvasGroup.blocksRaycasts = true;
         
         float speed = Mathf.Abs(canvasGroup.alpha - targetAlpha) / fadeDuration;
         while (!Mathf.Approximately(canvasGroup.alpha, targetAlpha))
         {
+            // 每次循环都检查canvasGroup是否还存在
+            if (canvasGroup == null)
+            {
+                Debug.LogWarning("CanvasGroup在淡入淡出过程中被销毁");
+                break;
+            }
+            
             canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
             yield return null;
         }
-        canvasGroup.blocksRaycasts = false;
+        
+        if (canvasGroup != null)
+        {
+            canvasGroup.blocksRaycasts = false;
+        }
         isFading = false;
         
     }

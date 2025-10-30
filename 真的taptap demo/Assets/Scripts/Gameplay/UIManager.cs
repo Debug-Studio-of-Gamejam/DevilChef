@@ -66,7 +66,14 @@ public class UIManager : Singleton<UIManager>
     // 显示/隐藏设置面板
     public void ToggleSettingPanel(bool show)
     {
-        settingPanel.SetActive(show);
+        if (settingPanel != null)
+        {
+            settingPanel.SetActive(show);
+        }
+        else
+        {
+            Debug.LogWarning("settingPanel未赋值，请检查UIManager组件中的引用");
+        }
     }
 
     // 显示/隐藏背包
