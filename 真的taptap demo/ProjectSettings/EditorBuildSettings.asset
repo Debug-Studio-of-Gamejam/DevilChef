@@ -41,4 +41,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SubMap8.unity
     guid: 6aba04e2482a043c08f5da0a6e302d5d
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/Scenes/CookingSence.unity
+    guid: 7cd28a25c3b139949bdd4f4be6b95109
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: 4ffcd0a79826f4bdaad533845f6d5bfb
+  - enabled: 1
+    path: Assets/Scenes/GameEndTest.unity
+    guid: 07cd0769b66444241813f37d8321224c
+  - enabled: 1
+    path: Assets/Scenes/SettingScene.unity
+    guid: 2615ee9b589412642b252ac651a7d4fc
+>>>>>>> Stashed changes
   m_configObjects: {}

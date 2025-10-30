@@ -9,15 +9,15 @@ public class UISettingsManager : MonoBehaviour
     [Header("Settings Panel")]
     public GameObject settingsPanel;
 
-    [Header("ȫ������")]
+    [Header("全屏设置")]
     public Toggle fullscreenToggle;
 
-    [Header("��������")]
+    [Header("音量设置")]
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
 
-    [Header("��ť����")]
+    [Header("按钮引用")]
     public Button closeButton;
     public Button applyButton;
 
@@ -28,7 +28,7 @@ public class UISettingsManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // ȷ������ʼ����
+            // 确保面板初始隐藏
             if (settingsPanel != null)
                 settingsPanel.SetActive(false);
         }
@@ -46,7 +46,7 @@ public class UISettingsManager : MonoBehaviour
 
     private void InitializeUIComponents()
     {
-        // ��UI�¼�
+        // 绑定UI事件
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.AddListener(OnFullscreenToggleChanged);
 
@@ -66,7 +66,7 @@ public class UISettingsManager : MonoBehaviour
             applyButton.onClick.AddListener(ApplySettings);
     }
 
-    #region ��������
+    #region 弹窗控制
     public void ToggleSettingsPanel()
     {
         if (settingsPanel == null) return;
@@ -74,16 +74,16 @@ public class UISettingsManager : MonoBehaviour
         bool isActive = !settingsPanel.activeSelf;
         settingsPanel.SetActive(isActive);
 
-        // ����������ʾ
+        // 更新设置显示
         if (isActive)
         {
             LoadSettings();
         }
 
-        // ��ͣ��Ϸ�߼�
+        // 暂停游戏逻辑
         UpdateTimeScale(isActive);
 
-        // ������Ч
+        // 播放音效
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayButtonClick();
     }
@@ -122,6 +122,104 @@ public class UISettingsManager : MonoBehaviour
             AudioManager.Instance.PlayButtonClick();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// 返回主界面（StartScene）
+    /// </summary>
+    public void ReturnToStartScene()
+    {
+        Debug.Log("UISettingsManager：返回主界面");
+
+        // 播放按钮音效
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClick();
+        }
+
+        // 关闭设置面板
+        CloseSettings();
+
+        // 使用TransitionManager返回开始场景
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.ReturnToStartScene();
+        }
+        else
+        {
+            Debug.LogError("TransitionManager.Instance 为 null！无法返回主界面");
+            
+            // 备用方案：直接使用SceneManager
+            UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+        }
+    }
+
+    /// <summary>
+    /// 记录进入设置场景前的场景名
+    /// </summary>
+    private string previousSceneName = "";
+    
+    /// <summary>
+    /// 设置进入设置场景前的场景名
+    /// </summary>
+    public void SetPreviousScene(string sceneName)
+    {
+        previousSceneName = sceneName;
+        Debug.Log($"记录进入设置前的场景: {previousSceneName}");
+    }
+    
+    /// <summary>
+    /// 返回之前的界面
+    /// </summary>
+    public void ReturnToPreviousScene()
+    {
+        Debug.Log($"UISettingsManager：返回之前的界面，之前场景: {previousSceneName}");
+
+        // 播放按钮音效
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClick();
+        }
+
+        // 关闭设置面板
+        CloseSettings();
+
+        // 使用TransitionManager返回上一个场景
+        if (TransitionManager.Instance != null)
+        {
+            if (!string.IsNullOrEmpty(previousSceneName) && previousSceneName != "SettingScene")
+            {
+                // 返回之前记录的场景
+                TransitionManager.Instance.Transition("SettingScene", previousSceneName);
+            }
+            else
+            {
+                // 如果没有记录或记录无效，返回开始场景
+                Debug.LogWarning("没有有效的之前场景记录，返回开始场景");
+                TransitionManager.Instance.ReturnToStartScene();
+            }
+        }
+        else
+        {
+            Debug.LogError("TransitionManager.Instance 为 null！无法返回之前的界面");
+            
+            // 备用方案：返回开始场景
+            UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+        }
+    }
+
     private void UpdateTimeScale(bool isPaused)
     {
         if (IsInGameScene())
@@ -139,11 +237,11 @@ public class UISettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region ���ù���
+    #region 设置功能
     public void OnFullscreenToggleChanged(bool isOn)
     {
         Screen.fullScreen = isOn;
-        Debug.Log($"ȫ��ģʽ: {(isOn ? "����" : "�ر�")}");
+        Debug.Log($"全屏模式: {(isOn ? "开启" : "关闭")}");
     }
 
     public void OnMasterVolumeChanged(float volume)
@@ -165,14 +263,14 @@ public class UISettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region ���ó־û�
+    #region 设置持久化
     public void SaveSettings()
     {
-        // ȫ������
+        // 全屏设置
         if (fullscreenToggle != null)
             PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 
-        // ��������
+        // 音量设置
         if (masterVolumeSlider != null)
             PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
 
@@ -183,12 +281,12 @@ public class UISettingsManager : MonoBehaviour
             PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
 
         PlayerPrefs.Save();
-        Debug.Log("�����ѱ���");
+        Debug.Log("设置已保存");
     }
 
     public void LoadSettings()
     {
-        // ȫ������
+        // 全屏设置
         if (fullscreenToggle != null)
         {
             bool fullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
@@ -196,7 +294,7 @@ public class UISettingsManager : MonoBehaviour
             Screen.fullScreen = fullscreen;
         }
 
-        // ��������
+        // 音量设置
         if (masterVolumeSlider != null)
             masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
 
@@ -206,13 +304,13 @@ public class UISettingsManager : MonoBehaviour
         if (sfxVolumeSlider != null)
             sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
-        Debug.Log("�����Ѽ���");
+        Debug.Log("设置已加载");
     }
     #endregion
 
     void OnDestroy()
     {
-        // �����¼���
+        // 清理事件绑定
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenToggleChanged);
 
