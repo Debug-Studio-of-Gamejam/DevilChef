@@ -315,7 +315,8 @@ public class CookingUI : MonoBehaviour
         );
         if (finalScoreText != null)
             finalScoreText.text = $"总分: {result.finalScore}";
-        
+        selectedMainIngredient = IngredientName.None;
+        selectedGarnishes.Clear();
     }
 
     #endregion
