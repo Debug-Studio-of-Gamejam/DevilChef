@@ -28,7 +28,6 @@ public class CursorManager : Singleton<CursorManager>
         {
             if (GameManager.Instance.isPaused || GameManager.Instance.isTalking)
             {
-                Debug.Log("游戏已停止");
                 return;
             }
             
