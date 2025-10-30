@@ -6,6 +6,7 @@ using TMPro;
 
 public class CookingUI : MonoBehaviour
 {
+    public List<RecipeSO> recipes;
     public RecipeSO currentRecipe;
 
     [Header("UI 面板")]
@@ -114,6 +115,7 @@ public class CookingUI : MonoBehaviour
 
         List<IngredientEntry> playerIngredients = InventoryManager.Instance.ingredients;
 
+        Debug.Log($"更新厨房背包，当前有 {playerIngredients.Count} 种物品");
         maxPage = Mathf.CeilToInt((float)playerIngredients.Count / slotsPerPage) - 1;
         if (maxPage < 0) maxPage = 0;
         bool showPagingButtons = (maxPage > 0);
@@ -145,6 +147,8 @@ public class CookingUI : MonoBehaviour
 
     public void OnOpenCookingUI()
     {
+        // 打开背包面板：需要更新当前菜谱，刷新背包
+        RefreshBackpackDisplay();
         SwitchToPanel(selectionPanel);
     }
 
@@ -301,11 +305,7 @@ public class CookingUI : MonoBehaviour
     {
         float playerHeat = heatSlider.value * 100f;
         float playerTime = timeSlider.value * 100f;
-        if (currentRecipe == null)
-        {
-            Debug.LogError("没有设置当前食谱(currentRecipe)");
-            return;
-        }
+        currentRecipe = recipes[GameManager.Instance.currentRound - 1];
         CookingResult result = CookingManager.Instance.CalculateScore(
             currentRecipe,
             selectedMainIngredient,

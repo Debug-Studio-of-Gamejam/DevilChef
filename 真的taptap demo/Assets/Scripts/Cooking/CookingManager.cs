@@ -50,8 +50,6 @@ public class CookingManager : Singleton<CookingManager>
         HideCookingPanel();
         GameManager.Instance.OnScoreEvaluated(finalScore >= PASS_SCORE);
         
-        
-
         return new CookingResult
         {
             basicTasteScore = basicTasteScore,
@@ -59,8 +57,6 @@ public class CookingManager : Singleton<CookingManager>
             finalScore = finalScore,
             isPass = (finalScore >= PASS_SCORE)
         };
-        
-        
     }
 
     private int CalculateBasicTasteScore(RecipeSO recipe, IngredientName mainIngredient, List<IngredientName> garnishes)

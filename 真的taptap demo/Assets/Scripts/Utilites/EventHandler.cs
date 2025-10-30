@@ -53,7 +53,7 @@ public class EventHandler
     
     public static event Action StartNewGameEvent;
 
-    public static void CallIStartNewGame()
+    public static void CallStartNewGame()
     {
         StartNewGameEvent?.Invoke();
     }

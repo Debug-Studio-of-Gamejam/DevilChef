@@ -13109,7 +13109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52af8c6f0a4f4f4cb6cd23e9b0b0bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRecipe: {fileID: 11400000, guid: 0d5c8a69a7449ed408cc08f670f35ab4, type: 2}
+  recipes:
+  - {fileID: 11400000, guid: 0d5c8a69a7449ed408cc08f670f35ab4, type: 2}
+  - {fileID: 11400000, guid: b4bfdb58a5932c54e84c09b961a02b36, type: 2}
+  - {fileID: 11400000, guid: d3bccd34bd0f57d46b577ee6b0bcfded, type: 2}
+  - {fileID: 11400000, guid: 0ad3248dd75b7c14b98e0fcb7a12cf3d, type: 2}
+  - {fileID: 11400000, guid: 7c3c66ca9a3af184cb96e526f19a98d0, type: 2}
+  - {fileID: 11400000, guid: 672cf1443aca8e047a75793b71acadb2, type: 2}
+  - {fileID: 11400000, guid: 7387792f6cb2bfe49be8006b97145d1f, type: 2}
   selectionPanel: {fileID: 3808521707853296524}
   cookingPanel: {fileID: 3808521707732986336}
   scoringPanel: {fileID: 3808521708482710943}

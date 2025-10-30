@@ -118,13 +118,6 @@ public class GameEnding : MonoBehaviour
         GameManager.Instance.StartNewRound();
     }
 
-    private IEnumerator ShowAndReturnToStart()
-    {
-        yield return new WaitForSeconds(2f);
-        background.sprite = finalSprite;
-        DialogueSystem.Instance.ShowDialogue(endlessDialogueID);
-    }
-
     private IEnumerator StartRound7Flow()
     {
         yield return new WaitForSeconds(2f);

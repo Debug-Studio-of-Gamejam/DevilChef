@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         currentRound = 1;
         triggeredDialogues.Clear();
         isPaused = false;
-        EventHandler.CallIStartNewGame();
+        EventHandler.CallStartNewGame();
         TransitionManager.Instance.TransitionToOpenning();
     }
 
