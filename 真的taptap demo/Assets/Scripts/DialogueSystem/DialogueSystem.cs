@@ -195,7 +195,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                 characterNameLable.gameObject.SetActive(true);
                 if (line.speakerName.StartsWith("主角"))
                 {
-                    characterNameLable.text = "主角";//GameManager.Instance.playerName;
+                    characterNameLable.text = "你";//GameManager.Instance.playerName;
                     string numberPart = Regex.Replace(line.speakerName, @"[^\d]", "");
                     if (int.TryParse(numberPart, out int index))
                     {

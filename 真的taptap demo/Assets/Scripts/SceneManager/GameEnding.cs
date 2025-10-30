@@ -10,7 +10,7 @@ public class GameEnding : MonoBehaviour
     // √: 评分失败的ID ：910 对话结束，出现图片成为鱼食，然后回到开始界面
     // √：评分成功：王的认可认可作为背景，对话ID根据轮次判断（1开头的ID）。 -> 进入下一个轮次的大地图
     //  第六轮， 成功之后 ->
-    //                    分支1： 可以判断前置对话IDList 触发：920,
+    //                    分支1： 可以判断前置对话IDList 额外触发：920,
     //                          √ 选项 921(对话 921): 显示图片逃离不能（动画）回开始界面
     //                          √ 选项 922(对话 922): 进入第七轮的
     //                     分支2 ：直接回大地图
@@ -59,24 +59,7 @@ public class GameEnding : MonoBehaviour
         }
         else
         {
-            if (currentRound == 6)
-            {
-                bool allGroupsSatisfied = prerequisiteDialogueID.All(
-                    group => group.Any(id => GameManager.Instance.triggeredDialogues.Contains(id))
-                );
-                if (allGroupsSatisfied)
-                {
-                    //第六天的特殊对话
-                    DialogueSystem.Instance.ShowDialogue(107);
-                }
-                else
-                {
-                    Debug.Log("第六天 无对话成功");
-                    StartCoroutine(WaitAndGoToMap());
-                }
-                
-            }
-            else if (currentRound == 7)
+            if (currentRound == 7)
             {
                 StartCoroutine(StartRound7Flow());
             }
@@ -104,7 +87,19 @@ public class GameEnding : MonoBehaviour
         }
         else if(dialogueID == 107)
         {
-            DialogueSystem.Instance.ShowDialogue(Round6DialogueID);
+            //第六天的特殊对话
+            bool allGroupsSatisfied = prerequisiteDialogueID.All(
+                group => group.Any(id => GameManager.Instance.triggeredDialogues.Contains(id))
+            );
+            if (allGroupsSatisfied)
+            {
+                DialogueSystem.Instance.ShowDialogue(Round6DialogueID);
+            }
+            else
+            {
+                GameManager.Instance.StartNewRound();
+            }
+            
         }
         else if (dialogueID == Round6successDialogueID || successDialogueID.Contains(dialogueID))
         {
@@ -135,12 +130,10 @@ public class GameEnding : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.DialogueFinishedEvent += OnDialogueFinished;
-        EventHandler.SelectDialogueOptionEvent += OnDialogueFinished;
     }
 
     private void OnDisable()
     {
         EventHandler.DialogueFinishedEvent -= OnDialogueFinished;
-        EventHandler.SelectDialogueOptionEvent -= OnDialogueFinished;
     }
 }

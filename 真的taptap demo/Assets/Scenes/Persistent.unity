@@ -4833,7 +4833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4da0ba3db5444e90ac3846ad130ff3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSceneName: StartScene
+  startSceneName: GameEndTest
   OpenningSceneName: OpeningScene
   gameEndSceneName: EndingScene
   mapSceneName: MapScene
@@ -5308,7 +5308,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -13117,6 +13117,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c3c66ca9a3af184cb96e526f19a98d0, type: 2}
   - {fileID: 11400000, guid: 672cf1443aca8e047a75793b71acadb2, type: 2}
   - {fileID: 11400000, guid: 7387792f6cb2bfe49be8006b97145d1f, type: 2}
+  currentRecipe: {fileID: 0}
   selectionPanel: {fileID: 3808521707853296524}
   cookingPanel: {fileID: 3808521707732986336}
   scoringPanel: {fileID: 3808521708482710943}

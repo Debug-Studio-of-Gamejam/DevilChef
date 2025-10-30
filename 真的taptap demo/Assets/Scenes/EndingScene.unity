@@ -238,7 +238,7 @@ MonoBehaviour:
   background: {fileID: 1000004332}
   successSprite: {fileID: 21300000, guid: 352d37bfec3db44ef8846d7065c27cef, type: 3}
   failSprite: {fileID: 21300000, guid: 304b08b86810d453a9264c04d4ef2eef, type: 3}
-  finalSprite: {fileID: 21300000, guid: 1abaefc767bcb4cae968ea30a7eaa995, type: 3}
+  finalSprite: {fileID: 21300000, guid: 24f063abe79d04addb11006c1549ff88, type: 3}
   noEscapeSprite: {fileID: 21300000, guid: b3c96e6fd8d324e40b58c8abd57e3df9, type: 3}
   endlessSprite: {fileID: 21300000, guid: 353e11e15b21249d2b7d280a29f7c323, type: 3}
 --- !u!4 &2001694005

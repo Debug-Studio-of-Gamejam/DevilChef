@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("玩家数据")]
     public int currentRound = 1;
-    public string playerName = "主角";
+    public string playerName = "你";
 
     [Header("游戏状态")]
     public string currentSceneName;
