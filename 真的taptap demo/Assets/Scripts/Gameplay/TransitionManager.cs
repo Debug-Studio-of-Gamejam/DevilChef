@@ -59,4 +59,15 @@ public class TransitionManager : Singleton<TransitionManager>
         isFading = false;
         
     }
+
+    /// <summary>
+    /// 返回开始场景
+    /// </summary>
+    public void ReturnToStartScene()
+    {
+        if (!isFading)
+        {
+            Transition(CurrentSceneName, startSceneName);
+        }
+    }
 }
