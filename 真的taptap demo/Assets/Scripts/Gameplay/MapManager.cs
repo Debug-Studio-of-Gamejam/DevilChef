@@ -9,10 +9,12 @@ public class MapManager : MonoBehaviour
     public GameObject mapPanel;
     public GameObject toolPanel;
     public GameObject inventoryButton;
+    public GameObject TipsPanel;
     [SceneName] public string mapSceneName;
     [SceneName] public List<string> subMapSceneNames;
     MapView mapView;
     ToolView toolView;
+    
 
     private void Start()
     {
