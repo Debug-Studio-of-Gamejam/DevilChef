@@ -32,6 +32,9 @@ public class GameManager : Singleton<GameManager>
         // playerSanity = 100;
         // playerMoney = 50;
 
+        // 设置当前场景名
+        currentSceneName = "StartScene";
+
         // 加载开场场景
         LoadScene("OpeningScene");
     }
@@ -55,7 +58,17 @@ public class GameManager : Singleton<GameManager>
     public void LoadScene(string sceneName)
     {
         Debug.Log("准备加载场景: " + sceneName);
-        StartCoroutine(LoadSceneCoroutine(sceneName));
+        
+        // 使用TransitionManager进行场景切换，保持Persistent场景中的摄像机
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.Transition(currentSceneName, sceneName);
+        }
+        else
+        {
+            Debug.LogError("TransitionManager.Instance 为 null！使用默认场景加载");
+            StartCoroutine(LoadSceneCoroutine(sceneName));
+        }
     }
 
     private IEnumerator LoadSceneCoroutine(string sceneName)

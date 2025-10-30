@@ -9,7 +9,45 @@ public class CursorManager : Singleton<CursorManager>
 {
     public Image cursor;
     ItemDetails currentItem;
-    private Vector3 mousePos => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    private Vector3 mousePos
+    {
+        get
+        {
+            // 首先尝试使用Camera.main
+            if (Camera.main != null)
+            {
+                return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            
+            // 如果Camera.main为null，尝试查找可用的摄像机
+            Debug.LogWarning("主摄像机为null，尝试查找可用的摄像机");
+            Camera[] cameras = FindObjectsOfType<Camera>();
+            
+            // 优先查找标记为MainCamera的启用摄像机
+            foreach (Camera cam in cameras)
+            {
+                if (cam.CompareTag("MainCamera") && cam.isActiveAndEnabled)
+                {
+                    Debug.Log("找到并使用标记为MainCamera的摄像机: " + cam.name);
+                    return cam.ScreenToWorldPoint(Input.mousePosition);
+                }
+            }
+            
+            // 如果没有找到MainCamera，使用第一个启用的摄像机
+            foreach (Camera cam in cameras)
+            {
+                if (cam.isActiveAndEnabled)
+                {
+                    Debug.LogWarning("未找到标记为MainCamera的摄像机，使用第一个启用的摄像机: " + cam.name);
+                    return cam.ScreenToWorldPoint(Input.mousePosition);
+                }
+            }
+            
+            // 如果没有任何摄像机可用，返回默认值但不报错
+            Debug.LogWarning("未找到可用的摄像机，返回默认位置");
+            return Vector3.zero;
+        }
+    }
     private bool canClick = false;
     private bool holdItem = false;
     

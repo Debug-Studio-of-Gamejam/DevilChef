@@ -7,8 +7,47 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Persistent.unity
+    guid: 96e1a495827fc4f378b284a00a9622aa
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
+    guid: 297c772e936889b4596f973aa739aba2
   - enabled: 1
     path: Assets/Scenes/OpeningScene.unity
+    guid: 3748a9e4eb6665e4b9cc54227b7e9218
+  - enabled: 1
+    path: Assets/Scenes/MapScene.unity
+    guid: e257d202605de46e0a358670db00db90
+  - enabled: 1
+    path: Assets/Scenes/SettingScene.unity
+    guid: 2615ee9b589412642b252ac651a7d4fc
+  - enabled: 1
+    path: Assets/Scenes/SubMap1.unity
+    guid: ab10f8ef79327446888bcb14a7e250ba
+  - enabled: 1
+    path: Assets/Scenes/SubMap2.unity
+    guid: ef1da301c357a456e99c862781e6ab23
+  - enabled: 1
+    path: Assets/Scenes/SubMap3.unity
+    guid: b548d09d2e4ed4f33a5bc5d7f5c4dcd5
+  - enabled: 1
+    path: Assets/Scenes/SubMap4.unity
+    guid: 964502010acf14cf98e415a47846f737
+  - enabled: 1
+    path: Assets/Scenes/SubMap5.unity
+    guid: 440cad735d9514ed0a141ff2f09be51a
+  - enabled: 1
+    path: Assets/Scenes/SubMap6.unity
+    guid: 24911097481ea478095255666f665b8a
+  - enabled: 1
+    path: Assets/Scenes/SubMap7.unity
+    guid: d84912b22bb39449f8287d87e38bdd21
+  - enabled: 1
+    path: Assets/Scenes/SubMap8.unity
+    guid: 6aba04e2482a043c08f5da0a6e302d5d
+  - enabled: 1
+    path: Assets/Scenes/DialogueTest.unity
+    guid: 963456b269418412b92ef420860e65a4
+  - enabled: 1
+    path: Assets/Scenes/ItemBarTest.unity
+    guid: 093d78316ee4e47818b6f732d48077df
   m_configObjects: {}

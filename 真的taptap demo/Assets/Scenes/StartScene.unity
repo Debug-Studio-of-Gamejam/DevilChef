@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFrom: StartScene
-  sceneTo: Persistent
+  sceneTo: OpeningScene
 --- !u!1 &543033343
 GameObject:
   m_ObjectHideFlags: 0
