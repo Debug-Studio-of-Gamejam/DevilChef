@@ -17,9 +17,10 @@ public class UIManager : Singleton<UIManager>
     }
 
     // 显示/隐藏设置面板
-    public void ToggleSettingPanel(bool show)
+    public void ShowSettingPanel()
     {
-        settingPanel.SetActive(show);
+        Debug.Log("ShowSettingPanel");
+        settingPanel.SetActive(true);
     }
 
     // 显示/隐藏背包

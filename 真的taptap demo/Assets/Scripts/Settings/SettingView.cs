@@ -44,6 +44,7 @@ public class SettingView : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        settingPanel.SetActive(false);
         TransitionManager.Instance.ReturnToStartScene();
     }
 

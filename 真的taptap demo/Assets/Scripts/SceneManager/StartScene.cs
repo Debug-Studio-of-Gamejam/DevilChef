@@ -14,4 +14,9 @@ public class StartScene : MonoBehaviour
         GameManager.Instance.ContinueGame();
     }
 
+    public void OpenSettings()
+    {
+        UIManager.Instance.ShowSettingPanel();
+    }
+
 }

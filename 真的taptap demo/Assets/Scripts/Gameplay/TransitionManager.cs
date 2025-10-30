@@ -55,6 +55,7 @@ public class TransitionManager : Singleton<TransitionManager>
 
     private IEnumerator TransitionToScene(string fromSceneName, string toSceneName)
     {
+        Debug.Log($"开始切换场景 {fromSceneName} -> {toSceneName}");
         yield return Fade(1);
         if (fromSceneName != string.Empty)
         {

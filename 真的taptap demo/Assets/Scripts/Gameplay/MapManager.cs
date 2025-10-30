@@ -30,6 +30,7 @@ public class MapManager : MonoBehaviour
         mapPanel.SetActive(isExploring);
         toolPanel.SetActive(isInSubMap);
         mapView.ToggleBackButton(isInSubMap);
+        mapView.UpdateRoundNum();
     }
 
     void OnStartDialogue(int id)
