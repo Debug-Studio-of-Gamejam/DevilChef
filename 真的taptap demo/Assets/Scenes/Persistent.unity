@@ -2543,6 +2543,7 @@ MonoBehaviour:
   characterNameLable: {fileID: 6092611245744507944}
   dialogueText: {fileID: 1682021996}
   narratorText: {fileID: 7210156227995935000}
+  npcAnimator: {fileID: 7071226538526884424}
   characterList:
   - name: 4
     avatarBack: {fileID: 21300000, guid: c4c2a6a547c68489d9c6ce3bf67a1218, type: 3}
@@ -7156,7 +7157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 077ac33d32d594ceb99629eb90323e29, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cf8dbc95fc864ad8a2fe158acfdea7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7205,6 +7206,7 @@ GameObject:
   - component: {fileID: 7071226538526884423}
   - component: {fileID: 2786882019644160235}
   - component: {fileID: 1814627914599358135}
+  - component: {fileID: 7071226538526884424}
   m_Layer: 5
   m_Name: NPCAvatar
   m_TagString: Untagged
@@ -18533,8 +18535,29 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 509, y: 466}
-  m_SizeDelta: {x: 763, y: 559}
+  m_SizeDelta: {x: 476, y: 634}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &7071226538526884424
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948867018489985877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f57fbbd23c1fb42f1a58d195319fb30c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7210156226332163018
 MonoBehaviour:
   m_ObjectHideFlags: 0
