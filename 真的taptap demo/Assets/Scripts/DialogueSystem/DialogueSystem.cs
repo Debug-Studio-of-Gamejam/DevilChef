@@ -49,6 +49,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public TextMeshProUGUI characterNameLable;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
+    public Animator npcAnimator;
+    private List<int> aoiDialogues = new List<int>(){712,722,732};
     
     [Header("立绘数据")]
     [SerializeField]
@@ -72,6 +74,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void Start()
     {
+        aoiDialogues = new List<int>() {712, 722, 732};
         HideAllDialoguePanel();
     }
 
@@ -134,7 +137,14 @@ public class DialogueSystem : Singleton<DialogueSystem>
             var lineData = dialogueData.dialogueText.Split('\n');
             textList = ParseDialogue(lineData);
             //Debug.Log($"对话 {dialogueData.dialogueId} 有 {textList.Count} 句");
+            //小葵特殊逻辑
             ShowDialogueLine();
+            
+            if (aoiDialogues.Contains(dialogueId))
+            {
+                Debug.Log("触发小葵对话");
+                npcAnimator.Play("aoibad");
+            }
         }
         else
         {
