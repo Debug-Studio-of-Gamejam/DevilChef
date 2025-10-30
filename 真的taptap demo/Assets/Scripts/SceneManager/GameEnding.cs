@@ -30,6 +30,7 @@ public class GameEnding : MonoBehaviour
     public Sprite finalSprite;
     public Sprite noEscapeSprite;
     public Sprite endlessSprite;
+    public Animator animator;
 
     [Header("基本对话")]
     public const int failDialogueID = 910;
@@ -49,6 +50,8 @@ public class GameEnding : MonoBehaviour
     
     private void Start()
     {
+        animator.gameObject.SetActive(false);
+        background.gameObject.SetActive(true);
         successDialogueID = new List<int>(){102,103,104,105,106,107};
         bool isSuccess = GameManager.Instance.isSuccess;
         int currentRound = GameManager.Instance.currentRound;
@@ -83,7 +86,10 @@ public class GameEnding : MonoBehaviour
         }
         else if (dialogueID == noEscapeDialogueID)
         {
-            StartCoroutine(ShowAndReturnToStart(noEscapeSprite));
+            animator.gameObject.SetActive(true);
+            background.gameObject.SetActive(false);
+            StartCoroutine(ShowNoEscape());
+            //StartCoroutine(ShowAndReturnToStart(noEscapeSprite));
         }
         else if(dialogueID == 107)
         {
@@ -118,6 +124,21 @@ public class GameEnding : MonoBehaviour
         yield return new WaitForSeconds(2f);
         background.sprite = finalSprite;
         DialogueSystem.Instance.ShowDialogue(endlessDialogueID);
+    }
+
+    
+    private IEnumerator ShowNoEscape()
+    {
+        string clipName = "noescape";
+        animator.Play(clipName);
+        yield return null;
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(clipName))
+        {
+            yield return null;
+        }
+        float time = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(time + 2f);
+        TransitionManager.Instance.ReturnToStartScene();
     }
 
     private IEnumerator ShowAndReturnToStart(Sprite sprite)
