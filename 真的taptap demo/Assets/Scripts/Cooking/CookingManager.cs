@@ -13,7 +13,6 @@ public struct CookingResult
     public bool isPass;
 }
 
-
 public class CookingManager : Singleton<CookingManager>
 {
     public GameObject cookingPanel;

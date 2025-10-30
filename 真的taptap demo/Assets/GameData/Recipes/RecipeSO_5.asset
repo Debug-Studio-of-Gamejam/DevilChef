@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a811e8021497a0418358eed0dbe5483, type: 3}
   m_Name: RecipeSO_5
   m_EditorClassIdentifier: 
-  recipeName: 
+  recipeName: "\u70E4\u5976\u916A"
   recipeIcon: {fileID: 0}
-  standardMain: 
-  commonMain: 
-  standardGarnish: 
-  commonGarnish: 
-  idealHeatRange: {x: 0, y: 0}
-  idealTimeRange: {x: 0, y: 0}
+  standardMain: 05000000
+  commonMain: 00000000
+  standardGarnish: 0c000000
+  commonGarnish: 080000000d0000000a0000000e000000130000000f000000
+  idealHeatRange: {x: 25, y: 35}
+  idealTimeRange: {x: 55, y: 75}
