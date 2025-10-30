@@ -4833,7 +4833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4da0ba3db5444e90ac3846ad130ff3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSceneName: GameEndTest
+  startSceneName: StartScene
   OpenningSceneName: OpeningScene
   gameEndSceneName: EndingScene
   mapSceneName: MapScene
