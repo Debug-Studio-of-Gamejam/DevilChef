@@ -5130,7 +5130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf29429cc3bd9d14e8cec9240236a2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingPanel: {fileID: 586618581}
+  settingView: {fileID: 622077478}
   inventoryPanel: {fileID: 0}
   fadePanel: {fileID: 868725250}
 --- !u!1 &1862036326

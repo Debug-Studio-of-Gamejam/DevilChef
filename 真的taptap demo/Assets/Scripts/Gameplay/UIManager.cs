@@ -6,21 +6,16 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     // 在Unity编辑器里把这些UI面板拖拽赋值！ // 包括toolbar
-    public GameObject settingPanel;
+    public SettingView settingView;
     public GameObject inventoryPanel; // 背包面板
     // ... 其他全局UI面板
     public GameObject fadePanel;
     
-    private void Start()
-    {
-        //fadePanel.SetActive(true);
-    }
 
     // 显示/隐藏设置面板
     public void ShowSettingPanel()
     {
-        Debug.Log("ShowSettingPanel");
-        settingPanel.SetActive(true);
+        settingView.OpenSettingPanel();
     }
 
     // 显示/隐藏背包

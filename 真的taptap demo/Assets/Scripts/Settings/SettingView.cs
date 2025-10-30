@@ -50,11 +50,13 @@ public class SettingView : MonoBehaviour
 
     public void CloseSettingPanel()
     {
+        GameManager.Instance.isPaused = false;
         settingPanel.SetActive(false);
     }
 
     public void OpenSettingPanel()
     {
+        GameManager.Instance.isPaused = true;
         settingPanel.SetActive(true);
     }
 }
