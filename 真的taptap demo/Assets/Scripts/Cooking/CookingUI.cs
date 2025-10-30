@@ -143,6 +143,11 @@ public class CookingUI : MonoBehaviour
         }
     }
 
+    public void OnOpenCookingUI()
+    {
+        SwitchToPanel(selectionPanel);
+    }
+
     private void SwitchToPanel(GameObject panelToShow)
     {
         selectionPanel?.SetActive(panelToShow == selectionPanel);
@@ -310,7 +315,6 @@ public class CookingUI : MonoBehaviour
         );
         if (finalScoreText != null)
             finalScoreText.text = $"总分: {result.finalScore}";
-        
         
     }
 

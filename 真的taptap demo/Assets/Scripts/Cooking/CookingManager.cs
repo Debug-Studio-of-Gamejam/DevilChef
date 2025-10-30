@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ public struct CookingResult
 public class CookingManager : Singleton<CookingManager>
 {
     public GameObject cookingPanel;
+    private CookingUI cookingUI;
     
     private const int MAX_BASIC_TASTE_SCORE = 40;
 
@@ -34,6 +36,11 @@ public class CookingManager : Singleton<CookingManager>
     private const float TIME_DEVIATION_STEP_PERCENT = 0.1f;
     private const float TIME_FACTOR_DROP = 0.1f;
     private const float TIME_MAX_ERROR_PERCENT = 0.4f;
+
+    private void Start()
+    {
+        cookingUI = cookingPanel.GetComponent<CookingUI>();
+    }
 
     public CookingResult CalculateScore(RecipeSO recipe, IngredientName mainIngredient, List<IngredientName> garnishes, float playerHeat, float playerTime)
     {
@@ -142,6 +149,8 @@ public class CookingManager : Singleton<CookingManager>
     {
         GameManager.Instance.isPaused = true;
         cookingPanel.SetActive(true);
+        cookingUI.OnOpenCookingUI();
+        
     }
 
     public void HideCookingPanel()
