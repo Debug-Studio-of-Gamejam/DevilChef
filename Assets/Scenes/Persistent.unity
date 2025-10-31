@@ -8774,7 +8774,7 @@ GameObject:
   - component: {fileID: 6139417664445477868}
   - component: {fileID: 5191509842294005840}
   m_Layer: 5
-  m_Name: R4C3
+  m_Name: R4C2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8945,7 +8945,7 @@ GameObject:
   - component: {fileID: 6139417663283615815}
   - component: {fileID: 5191509843254463483}
   m_Layer: 5
-  m_Name: R4C2
+  m_Name: R4C3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9046,7 +9046,7 @@ RectTransform:
   - {fileID: 8236041764311625321}
   - {fileID: 8513014337118722599}
   m_Father: {fileID: 3808521709147678067}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9198,7 +9198,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031363866133004485}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9207,11 +9207,11 @@ RectTransform:
   - {fileID: 8236041765565744578}
   - {fileID: 8513014338012082572}
   m_Father: {fileID: 3808521709147678067}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 384.3, y: 94.7}
+  m_AnchoredPosition: {x: 384.3, y: 94.69997}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2290744506526334081
@@ -13147,8 +13147,8 @@ MonoBehaviour:
   - {fileID: 5191509843456346106}
   - {fileID: 5191509842675343746}
   - {fileID: 5191509842830537929}
-  - {fileID: 5191509843254463483}
   - {fileID: 5191509842294005840}
+  - {fileID: 5191509843254463483}
   - {fileID: 5191509843885100804}
   heatSlider: {fileID: 3808521707769273360}
   timeSlider: {fileID: 3808521709160953865}
@@ -14131,8 +14131,8 @@ RectTransform:
   - {fileID: 2290744506641177339}
   - {fileID: 2290744505780223107}
   - {fileID: 2290744505666972104}
-  - {fileID: 2290744506306189050}
   - {fileID: 2290744505127566673}
+  - {fileID: 2290744506306189050}
   - {fileID: 2290744506717934085}
   m_Father: {fileID: 3808521707530500560}
   m_RootOrder: 1
