@@ -104,7 +104,7 @@ public class CookingUI : MonoBehaviour
     void OnEnable()
     {
         currentPage = 0;
-        //RefreshBackpackDisplay();
+        RefreshBackpackDisplay();
         OnClearSelectionClicked();
     }
 
@@ -118,6 +118,12 @@ public class CookingUI : MonoBehaviour
         Debug.Log($"更新厨房背包，当前有 {playerIngredients.Count} 种物品");
         maxPage = Mathf.CeilToInt((float)playerIngredients.Count / slotsPerPage) - 1;
         if (maxPage < 0) maxPage = 0;
+
+        if (currentPage > maxPage)
+        {
+            currentPage = maxPage;
+        }
+
         bool showPagingButtons = (maxPage > 0);
         inventoryPagePrevButton?.gameObject.SetActive(showPagingButtons);
         inventoryPageNextButton?.gameObject.SetActive(showPagingButtons);
@@ -306,6 +312,10 @@ public class CookingUI : MonoBehaviour
         float playerHeat = heatSlider.value * 100f;
         float playerTime = timeSlider.value * 100f;
         currentRecipe = recipes[GameManager.Instance.currentRound - 1];
+
+        IngredientName mainToCook = selectedMainIngredient;
+        List<IngredientName> garnishToCook = new List<IngredientName>(selectedGarnishes);
+
         CookingResult result = CookingManager.Instance.CalculateScore(
             currentRecipe,
             selectedMainIngredient,
