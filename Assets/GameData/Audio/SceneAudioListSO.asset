@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3e9301f5b3842db869f3628e9a156d, type: 3}
+  m_Name: SceneAudioListSO
+  m_EditorClassIdentifier: 
+  sceneAudioList:
+  - sceneName: StartScene
+    backgroundMusic: 2
+    ambientMusic: 0
+  - sceneName: OpeningScene
+    backgroundMusic: 3
+    ambientMusic: 0
+  - sceneName: MapScene
+    backgroundMusic: 1
+    ambientMusic: 0
+  - sceneName: SubMap1
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap2
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap3
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap4
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap5
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap6
+    backgroundMusic: 0
+    ambientMusic: 0
+  - sceneName: SubMap7
+    backgroundMusic: 0
+    ambientMusic: 0

@@ -50,6 +50,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
     public Animator npcAnimator;
+    //触发bug效果
     private List<int> aoiDialogues = new List<int>(){712,722,732};
     
     [Header("立绘数据")]
@@ -233,7 +234,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
                     // 把字符串转换成 CharacterName枚举
                     if (Enum.TryParse(line.speakerName, out CharacterName speakerName))
                     {
-                        
                         SpeakerInfo speaker = speakerDict[speakerName];
                         characterNameLable.text = line.speakerName;
                         if (speakerDict.ContainsKey(speakerName))
@@ -367,9 +367,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAvatars()
     {
-        if (npcAvatar != null) npcAvatar.gameObject.SetActive(false);
-        if (characterAvatarBack != null) characterAvatarBack.gameObject.SetActive(false);
-        if (characterAvatarFront != null) characterAvatarFront.gameObject.SetActive(false);
+        if (npcAvatar) npcAvatar.gameObject.SetActive(false);
+        if (characterAvatarBack is not null) characterAvatarBack.gameObject.SetActive(false);
+        if (characterAvatarFront is not null) characterAvatarFront.gameObject.SetActive(false);
     }
 
     private void HideOptions()

@@ -252,7 +252,6 @@ public class CookingUI : MonoBehaviour
 
     private void OnConfirmSelectionClicked()
     {
-        
         if (selectedMainIngredient == IngredientName.None || selectedGarnishes.Count == 0)
         {
             ShowErrorPopup("请至少添加一种主料和一种辅料");

@@ -145,7 +145,6 @@ public class CookingManager : Singleton<CookingManager>
         GameManager.Instance.isPaused = true;
         cookingPanel.SetActive(true);
         cookingUI.OnOpenCookingUI();
-        
     }
 
     public void HideCookingPanel()
