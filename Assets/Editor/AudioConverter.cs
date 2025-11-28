@@ -11,7 +11,7 @@ using System.IO;
 /// </summary>
 public class AudioConverter : EditorWindow
 {
-    [MenuItem("Tools/Audio/Convert MP3 to OGG")]
+    [MenuItem("Tools/Convert MP3 to OGG")]
     public static void ConvertMp3ToOgg()
     {
         string folder = EditorUtility.OpenFolderPanel("选择包含 MP3 的文件夹", "Assets", "");

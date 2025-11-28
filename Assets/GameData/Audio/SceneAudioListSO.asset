@@ -23,23 +23,26 @@ MonoBehaviour:
     backgroundMusic: 1
     ambientMusic: 0
   - sceneName: SubMap1
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 8
   - sceneName: SubMap2
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 8
   - sceneName: SubMap3
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 7
   - sceneName: SubMap4
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 5
   - sceneName: SubMap5
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 4
   - sceneName: SubMap6
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 10
   - sceneName: SubMap7
-    backgroundMusic: 0
-    ambientMusic: 0
+    backgroundMusic: 1
+    ambientMusic: 6
+  - sceneName: SubMap8
+    backgroundMusic: 1
+    ambientMusic: 9

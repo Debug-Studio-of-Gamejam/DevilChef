@@ -18,7 +18,7 @@ public class AudioInfoListSO : ScriptableObject
 public class AudioInf
 {
     public AudioName audioName;
-    public AudioClip audioClip;
+    public AudioClip clip;
     [Range(0f, 1f)]
     public float volume;
     public bool loop;
