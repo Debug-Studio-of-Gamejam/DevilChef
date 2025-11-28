@@ -50,6 +50,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI narratorText;
     public Animator npcAnimator;
+    //触发bug效果
     private List<int> aoiDialogues = new List<int>(){712,722,732};
     
     [Header("立绘数据")]
@@ -66,8 +67,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
     private bool typingFinished;
     private Coroutine typingCoroutine;
     private bool waitingForOption  = false;
-    
-    void Awake()
+
+    protected override void Awake()
     {
         speakerDict = characterList.ToDictionary(s => s.name, s => s);
     }
@@ -233,7 +234,6 @@ public class DialogueSystem : Singleton<DialogueSystem>
                     // 把字符串转换成 CharacterName枚举
                     if (Enum.TryParse(line.speakerName, out CharacterName speakerName))
                     {
-                        
                         SpeakerInfo speaker = speakerDict[speakerName];
                         characterNameLable.text = line.speakerName;
                         if (speakerDict.ContainsKey(speakerName))
@@ -241,7 +241,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                             // NPC 的图片位置特殊处理
                             if (npcNames.Contains(speaker.name))
                             {
-                                Debug.Log($"设置npc图片 {speaker.avatarFront.name}");
+                                //Debug.Log($"设置npc图片 {speaker.avatarFront.name}");
                                 npcAnimator.enabled = false;
                                 npcAvatar.gameObject.SetActive(true);
                                 npcAvatar.sprite = speaker.avatarFront;
@@ -367,9 +367,9 @@ public class DialogueSystem : Singleton<DialogueSystem>
 
     private void HideAvatars()
     {
-        if (npcAvatar != null) npcAvatar.gameObject.SetActive(false);
-        if (characterAvatarBack != null) characterAvatarBack.gameObject.SetActive(false);
-        if (characterAvatarFront != null) characterAvatarFront.gameObject.SetActive(false);
+        if (npcAvatar) npcAvatar.gameObject.SetActive(false);
+        if (characterAvatarBack is not null) characterAvatarBack.gameObject.SetActive(false);
+        if (characterAvatarFront is not null) characterAvatarFront.gameObject.SetActive(false);
     }
 
     private void HideOptions()

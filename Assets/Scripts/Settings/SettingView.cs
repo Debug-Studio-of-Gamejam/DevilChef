@@ -10,52 +10,42 @@ public class SettingView : MonoBehaviour
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
     
-    float musicVolume;
-    float sfxVolume;
     
-    private const string SFXVolumeKey = "SFXVolume";
-    private const string MusicVolumeKey = "MusicVolume";
-
-    private void Awake()
-    {
-        musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
-        sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
-    }
-
     private void Start()
     {
+        musicVolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.MusicVolumeKey, 1f);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.SFXVolumeKey, 1f);
         musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.AddListener(SetSfxVolume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicVolume = volume;
-        PlayerPrefs.SetFloat(MusicVolumeKey, volume);
-        PlayerPrefs.Save();
+        AudioManager.Instance.SetMusicVolume(volume);
     }
 
     public void SetSfxVolume(float volume)
     {
-        sfxVolume = volume;
-        PlayerPrefs.SetFloat(SFXVolumeKey, volume);
-        PlayerPrefs.Save();
+        AudioManager.Instance.SetSFXVolume(volume);
     }
 
     public void ReturnToMainMenu()
     {
+        AudioManager.Instance.PlaySFX(AudioName.按键音效);
         settingPanel.SetActive(false);
         TransitionManager.Instance.ReturnToStartScene();
     }
 
     public void CloseSettingPanel()
     {
+        AudioManager.Instance.PlaySFX(AudioName.按键音效);
         GameManager.Instance.isPaused = false;
         settingPanel.SetActive(false);
     }
 
     public void OpenSettingPanel()
     {
+        AudioManager.Instance.PlaySFX(AudioName.按键音效);
         GameManager.Instance.isPaused = true;
         settingPanel.SetActive(true);
     }

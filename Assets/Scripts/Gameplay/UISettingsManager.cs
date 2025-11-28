@@ -9,15 +9,15 @@ public class UISettingsManager : MonoBehaviour
     [Header("Settings Panel")]
     public GameObject settingsPanel;
 
-    [Header("È«ÆÁÉèÖÃ")]
+    [Header("å…¨å±è®¾ç½®")]
     public Toggle fullscreenToggle;
 
-    [Header("ÒôÁ¿ÉèÖÃ")]
+    [Header("éŸ³é‡è®¾ç½®")]
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
 
-    [Header("°´Å¥ÒıÓÃ")]
+    [Header("æŒ‰é’®å¼•ç”¨")]
     public Button closeButton;
     public Button applyButton;
 
@@ -28,7 +28,7 @@ public class UISettingsManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // È·±£Ãæ°å³õÊ¼Òş²Ø
+            // ç¡®ä¿é¢æ¿åˆå§‹éšè—
             if (settingsPanel != null)
                 settingsPanel.SetActive(false);
         }
@@ -46,12 +46,9 @@ public class UISettingsManager : MonoBehaviour
 
     private void InitializeUIComponents()
     {
-        // °ó¶¨UIÊÂ¼ş
+        // ç»‘å®šUIäº‹ä»¶
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.AddListener(OnFullscreenToggleChanged);
-
-        if (masterVolumeSlider != null)
-            masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
 
         if (musicVolumeSlider != null)
             musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
@@ -66,7 +63,7 @@ public class UISettingsManager : MonoBehaviour
             applyButton.onClick.AddListener(ApplySettings);
     }
 
-    #region µ¯´°¿ØÖÆ
+    #region å¼¹çª—æ§åˆ¶
     public void ToggleSettingsPanel()
     {
         if (settingsPanel == null) return;
@@ -74,18 +71,18 @@ public class UISettingsManager : MonoBehaviour
         bool isActive = !settingsPanel.activeSelf;
         settingsPanel.SetActive(isActive);
 
-        // ¸üĞÂÉèÖÃÏÔÊ¾
+        // æ›´æ–°è®¾ç½®æ˜¾ç¤º
         if (isActive)
         {
             LoadSettings();
         }
 
-        // ÔİÍ£ÓÎÏ·Âß¼­
+        // æš‚åœæ¸¸æˆé€»è¾‘
         UpdateTimeScale(isActive);
 
-        // ²¥·ÅÒôĞ§
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayButtonClick();
+        // æ’­æ”¾éŸ³æ•ˆ
+        // if (AudioManager.Instance != null)
+        //     AudioManager.Instance.PlayButtonClick();
     }
 
     public void OpenSettings()
@@ -96,8 +93,8 @@ public class UISettingsManager : MonoBehaviour
             LoadSettings();
             UpdateTimeScale(true);
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayButtonClick();
+            // if (AudioManager.Instance != null)
+            //     AudioManager.Instance.PlayButtonClick();
         }
     }
 
@@ -109,8 +106,8 @@ public class UISettingsManager : MonoBehaviour
             UpdateTimeScale(false);
             SaveSettings();
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayButtonClick();
+            // if (AudioManager.Instance != null)
+            //     AudioManager.Instance.PlayButtonClick();
         }
     }
 
@@ -118,8 +115,8 @@ public class UISettingsManager : MonoBehaviour
     {
         SaveSettings();
 
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayButtonClick();
+        // if (AudioManager.Instance != null)
+        //     AudioManager.Instance.PlayButtonClick();
     }
 
     private void UpdateTimeScale(bool isPaused)
@@ -139,17 +136,11 @@ public class UISettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region ÉèÖÃ¹¦ÄÜ
+    #region è®¾ç½®åŠŸèƒ½
     public void OnFullscreenToggleChanged(bool isOn)
     {
         Screen.fullScreen = isOn;
-        Debug.Log($"È«ÆÁÄ£Ê½: {(isOn ? "¿ªÆô" : "¹Ø±Õ")}");
-    }
-
-    public void OnMasterVolumeChanged(float volume)
-    {
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.SetMasterVolume(volume);
+        Debug.Log($"å…¨å±æ¨¡å¼: {(isOn ? "å¼€å¯" : "å…³é—­")}");
     }
 
     public void OnMusicVolumeChanged(float volume)
@@ -165,17 +156,14 @@ public class UISettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region ÉèÖÃ³Ö¾Ã»¯
+    #region è®¾ç½®æŒä¹…åŒ–
     public void SaveSettings()
     {
-        // È«ÆÁÉèÖÃ
+        // å…¨å±è®¾ç½®
         if (fullscreenToggle != null)
             PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 
-        // ÒôÁ¿ÉèÖÃ
-        if (masterVolumeSlider != null)
-            PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
-
+        // éŸ³é‡è®¾ç½®
         if (musicVolumeSlider != null)
             PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
 
@@ -183,12 +171,12 @@ public class UISettingsManager : MonoBehaviour
             PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
 
         PlayerPrefs.Save();
-        Debug.Log("ÉèÖÃÒÑ±£´æ");
+        Debug.Log("è®¾ç½®å·²ä¿å­˜");
     }
 
     public void LoadSettings()
     {
-        // È«ÆÁÉèÖÃ
+        // å…¨å±è®¾ç½®
         if (fullscreenToggle != null)
         {
             bool fullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
@@ -196,7 +184,7 @@ public class UISettingsManager : MonoBehaviour
             Screen.fullScreen = fullscreen;
         }
 
-        // ÒôÁ¿ÉèÖÃ
+        // éŸ³é‡è®¾ç½®
         if (masterVolumeSlider != null)
             masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
 
@@ -206,18 +194,15 @@ public class UISettingsManager : MonoBehaviour
         if (sfxVolumeSlider != null)
             sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
-        Debug.Log("ÉèÖÃÒÑ¼ÓÔØ");
+        Debug.Log("è®¾ç½®å·²åŠ è½½");
     }
     #endregion
 
     void OnDestroy()
     {
-        // ÇåÀíÊÂ¼ş°ó¶¨
+        // æ¸…ç†äº‹ä»¶ç»‘å®š
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenToggleChanged);
-
-        if (masterVolumeSlider != null)
-            masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
 
         if (musicVolumeSlider != null)
             musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);

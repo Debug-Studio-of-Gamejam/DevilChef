@@ -115,7 +115,7 @@ public class CookingUI : MonoBehaviour
 
         List<IngredientEntry> playerIngredients = InventoryManager.Instance.ingredients;
 
-        Debug.Log($"更新厨房背包，当前有 {playerIngredients.Count} 种物品");
+        //Debug.Log($"更新厨房背包，当前有 {playerIngredients.Count} 种物品");
         maxPage = Mathf.CeilToInt((float)playerIngredients.Count / slotsPerPage) - 1;
         if (maxPage < 0) maxPage = 0;
 
@@ -210,6 +210,7 @@ public class CookingUI : MonoBehaviour
 
     private void OnClearSelectionClicked()
     {
+        //AudioManager.Instance.PlaySFX(AudioName.按键音效);
         if (InventoryManager.Instance != null)
         {
             if (selectedMainIngredient != IngredientName.None)
@@ -252,7 +253,6 @@ public class CookingUI : MonoBehaviour
 
     private void OnConfirmSelectionClicked()
     {
-        
         if (selectedMainIngredient == IngredientName.None || selectedGarnishes.Count == 0)
         {
             ShowErrorPopup("请至少添加一种主料和一种辅料");
@@ -303,12 +303,14 @@ public class CookingUI : MonoBehaviour
 
     private void OnClearCookingClicked()
     {
+        AudioManager.Instance.PlaySFX(AudioName.按键音效);
         if (heatSlider != null) heatSlider.value = 0.5f;
         if (timeSlider != null) timeSlider.value = 0.5f;
     }
 
     private void OnConfirmCookingClicked()
     {
+        AudioManager.Instance.PlaySFX(AudioName.按键音效);
         float playerHeat = heatSlider.value * 100f;
         float playerTime = timeSlider.value * 100f;
         currentRecipe = recipes[GameManager.Instance.currentRound - 1];
