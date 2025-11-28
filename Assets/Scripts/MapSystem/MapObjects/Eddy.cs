@@ -7,9 +7,9 @@ public class Eddy : Interactable
     public GameObject Leviantan; 
     public override void Interact()
     {
-        // TODO : 播放泉水音效
         if (Leviantan.activeInHierarchy == false)
         {
+            AudioManager.Instance.PlaySFX(AudioName.出现利维坦);
             Leviantan.SetActive(true);
         }
     }

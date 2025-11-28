@@ -9,7 +9,7 @@ public class DataLoader: Singleton<DataLoader>
     public Dictionary<int, Option> options = new Dictionary<int, Option>(); 
     public Dictionary<CharacterName, CharacterEvent> characterEvents = new Dictionary<CharacterName, CharacterEvent>();
 
-    void Awake()
+    protected override void Awake()
     {
         TextAsset jsonText = Resources.Load<TextAsset>("database");
         if (jsonText == null)

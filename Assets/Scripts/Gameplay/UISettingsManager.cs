@@ -50,9 +50,6 @@ public class UISettingsManager : MonoBehaviour
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.AddListener(OnFullscreenToggleChanged);
 
-        if (masterVolumeSlider != null)
-            masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
-
         if (musicVolumeSlider != null)
             musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
 
@@ -84,8 +81,8 @@ public class UISettingsManager : MonoBehaviour
         UpdateTimeScale(isActive);
 
         // 播放音效
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayButtonClick();
+        // if (AudioManager.Instance != null)
+        //     AudioManager.Instance.PlayButtonClick();
     }
 
     public void OpenSettings()
@@ -96,8 +93,8 @@ public class UISettingsManager : MonoBehaviour
             LoadSettings();
             UpdateTimeScale(true);
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayButtonClick();
+            // if (AudioManager.Instance != null)
+            //     AudioManager.Instance.PlayButtonClick();
         }
     }
 
@@ -109,8 +106,8 @@ public class UISettingsManager : MonoBehaviour
             UpdateTimeScale(false);
             SaveSettings();
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayButtonClick();
+            // if (AudioManager.Instance != null)
+            //     AudioManager.Instance.PlayButtonClick();
         }
     }
 
@@ -118,8 +115,8 @@ public class UISettingsManager : MonoBehaviour
     {
         SaveSettings();
 
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlayButtonClick();
+        // if (AudioManager.Instance != null)
+        //     AudioManager.Instance.PlayButtonClick();
     }
 
     private void UpdateTimeScale(bool isPaused)
@@ -146,12 +143,6 @@ public class UISettingsManager : MonoBehaviour
         Debug.Log($"全屏模式: {(isOn ? "开启" : "关闭")}");
     }
 
-    public void OnMasterVolumeChanged(float volume)
-    {
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.SetMasterVolume(volume);
-    }
-
     public void OnMusicVolumeChanged(float volume)
     {
         if (AudioManager.Instance != null)
@@ -173,9 +164,6 @@ public class UISettingsManager : MonoBehaviour
             PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 
         // 音量设置
-        if (masterVolumeSlider != null)
-            PlayerPrefs.SetFloat("MasterVolume", masterVolumeSlider.value);
-
         if (musicVolumeSlider != null)
             PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
 
@@ -215,9 +203,6 @@ public class UISettingsManager : MonoBehaviour
         // 清理事件绑定
         if (fullscreenToggle != null)
             fullscreenToggle.onValueChanged.RemoveListener(OnFullscreenToggleChanged);
-
-        if (masterVolumeSlider != null)
-            masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
 
         if (musicVolumeSlider != null)
             musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);

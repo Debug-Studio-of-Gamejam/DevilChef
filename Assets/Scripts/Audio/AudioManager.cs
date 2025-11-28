@@ -4,95 +4,145 @@ using UnityEngine.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    
+    public const string SFXVolumeKey = "SFXVolume";
+    public const string MusicVolumeKey = "MusicVolume";
+    
     [Header("音频数据")]
     public AudioInfoListSO audioInfoListSO;
     public SceneAudioListSO sceneAudioListSO;
-    
+
     [Header("Audio Sources")]
     public AudioSource musicSource;
+    public AudioSource ambientSource;
     public AudioSource sfxSource;
 
-    [Header("Audio Clips")]
-    public AudioClip buttonClickSFX;
-    public AudioClip mainMenuMusic;
-
     // 音量设置
-    private float _masterVolume = 1f;
     private float _musicVolume = 1f;
     private float _sfxVolume = 1f;
 
-    void Awake()
-    {
-
-    }
+    private AudioName currentMusic;
+    private AudioName currentAmbinent;
+    private AudioName currentSFX;
 
     void Start()
     {
         LoadAudioSettings();
     }
 
-    // 音量控制方法
-    public void SetMasterVolume(float volume)
+    void OnAfterSceneLoad(string sceneName)
     {
-        _masterVolume = Mathf.Clamp01(volume);
-        UpdateAudioVolumes();
-        PlayerPrefs.SetFloat("MasterVolume", _masterVolume);
+        var sceneAudioInfo = sceneAudioListSO.GetSceneAudioInfo(sceneName);
+        PlayMusic(sceneAudioInfo?.backgroundMusic ?? AudioName.None);
+        PlayAmbient(sceneAudioInfo?.ambientMusic ?? AudioName.None);
+    }
+
+    public void PlayMusic(AudioName name)
+    {
+        
+        if (name == AudioName.None)
+        {
+            musicSource.Stop();
+            currentMusic = AudioName.None;
+            return;
+        }
+
+        if (name == currentMusic)
+        {
+            return;
+        }
+        currentMusic = name;
+        AudioInf musicInfo = audioInfoListSO.GetAudioInfo(name);
+        musicSource.clip = musicInfo.clip;
+        musicSource.volume = musicInfo.volume * _musicVolume;
+        musicSource.loop = musicInfo.loop;
+        musicSource.Play();
+    }
+    
+    public void PlayAmbient(AudioName name)
+    {
+        if (name == AudioName.None)
+        {
+            ambientSource.Stop();
+            currentAmbinent = AudioName.None;
+            return;
+        }
+        if (name == currentAmbinent)
+        {
+            return;
+        }
+        currentAmbinent = name;
+        AudioInf ambientInfo = audioInfoListSO.GetAudioInfo(name);
+        ambientSource.clip = ambientInfo.clip;
+        ambientSource.volume = ambientInfo.volume * _sfxVolume;
+        ambientSource.loop = ambientInfo.loop;
+        ambientSource.Play();
+    }
+    
+    public void PlaySFX(AudioName name)
+    {
+        if (name == AudioName.None)
+        {
+            sfxSource.Stop();
+            return;
+        }
+
+        if (sfxSource.isPlaying && currentSFX == name)
+        {
+            return;
+        }
+        currentSFX = name;
+        AudioInf audioInf = audioInfoListSO.GetAudioInfo(name);
+        sfxSource.clip = audioInf.clip;
+        sfxSource.volume = audioInf.volume * _sfxVolume;
+        sfxSource.loop = false;
+        sfxSource.Play();
+        //sfxSource.PlayOneShot(audioInf.clip, audioInf.volume * _sfxVolume);
     }
 
     public void SetMusicVolume(float volume)
     {
         _musicVolume = Mathf.Clamp01(volume);
         UpdateAudioVolumes();
-        PlayerPrefs.SetFloat("MusicVolume", _musicVolume);
+        PlayerPrefs.SetFloat(MusicVolumeKey, _musicVolume);
     }
 
     public void SetSFXVolume(float volume)
     {
         _sfxVolume = Mathf.Clamp01(volume);
         UpdateAudioVolumes();
-        PlayerPrefs.SetFloat("SFXVolume", _sfxVolume);
+        PlayerPrefs.SetFloat(SFXVolumeKey, _sfxVolume);
     }
 
     private void UpdateAudioVolumes()
     {
+        //Debug.Log($"Music Volume: {_musicVolume} | sfxSource:{_sfxVolume}");
         if (musicSource != null)
-            musicSource.volume = _masterVolume * _musicVolume;
+            musicSource.volume = _musicVolume;
+        
+        if (ambientSource != null)
+            ambientSource.volume = _sfxVolume;
 
         if (sfxSource != null)
-            sfxSource.volume = _masterVolume * _sfxVolume;
+            sfxSource.volume = _sfxVolume;
     } 
 
     private void LoadAudioSettings()
     {
-        _masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        _musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        _sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        _musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+        _sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
 
         UpdateAudioVolumes();
     }
-
-    public void PlayMusic(AudioClip musicClip)
+    
+    private void OnEnable()
     {
-        if (musicSource != null && musicClip != null)
-        {
-            musicSource.clip = musicClip;
-            musicSource.loop = true;
-            musicSource.Play();
-        }
+        EventHandler.AfterSceneLoadEvent += OnAfterSceneLoad;
     }
 
-    public void PlaySFX(AudioClip sfxClip)
+    private void OnDisable()
     {
-        if (sfxSource != null && sfxClip != null)
-        {
-            sfxSource.PlayOneShot(sfxClip);
-        }
+        EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoad;
     }
-
-    // 现有的音频播放方法
-    public void PlayButtonClick()
-    {
-        if (sfxSource != null && buttonClickSFX != null)
-            sfxSource.PlayOneShot(buttonClickSFX);
-    }
+    
 }

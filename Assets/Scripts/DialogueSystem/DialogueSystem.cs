@@ -67,8 +67,8 @@ public class DialogueSystem : Singleton<DialogueSystem>
     private bool typingFinished;
     private Coroutine typingCoroutine;
     private bool waitingForOption  = false;
-    
-    void Awake()
+
+    protected override void Awake()
     {
         speakerDict = characterList.ToDictionary(s => s.name, s => s);
     }
@@ -241,7 +241,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
                             // NPC 的图片位置特殊处理
                             if (npcNames.Contains(speaker.name))
                             {
-                                Debug.Log($"设置npc图片 {speaker.avatarFront.name}");
+                                //Debug.Log($"设置npc图片 {speaker.avatarFront.name}");
                                 npcAnimator.enabled = false;
                                 npcAvatar.gameObject.SetActive(true);
                                 npcAvatar.sprite = speaker.avatarFront;

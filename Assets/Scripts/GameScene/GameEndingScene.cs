@@ -59,16 +59,18 @@ public class GameEndingScene : MonoBehaviour
         if (!isSuccess)
         {
             DialogueSystem.Instance.ShowDialogue(failDialogueID);
+            AudioManager.Instance.PlayMusic(AudioName.评分未通过死亡结局);
         }
         else
         {
             if (currentRound == 7)
             {
+                AudioManager.Instance.PlayMusic(AudioName.通关后反转真结局);
                 StartCoroutine(StartRound7Flow());
             }
             else
             {
-                Debug.Log("currentRound : " + currentRound);
+                AudioManager.Instance.PlayMusic(AudioName.王打分时音效);
                 DialogueSystem.Instance.ShowDialogue(successDialogueID[currentRound-1]);
             }
         }
@@ -89,7 +91,6 @@ public class GameEndingScene : MonoBehaviour
             animator.gameObject.SetActive(true);
             background.gameObject.SetActive(false);
             StartCoroutine(ShowNoEscape());
-            //StartCoroutine(ShowAndReturnToStart(noEscapeSprite));
         }
         else if(dialogueID == 107)
         {
@@ -129,6 +130,7 @@ public class GameEndingScene : MonoBehaviour
     
     private IEnumerator ShowNoEscape()
     {
+        AudioManager.Instance.PlayMusic(AudioName.逃离失败结局);
         string clipName = "noescape";
         animator.Play(clipName);
         yield return null;
@@ -144,7 +146,7 @@ public class GameEndingScene : MonoBehaviour
     private IEnumerator ShowAndReturnToStart(Sprite sprite)
     {
         background.sprite = sprite;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         TransitionManager.Instance.ReturnToStartScene();
     }
 
